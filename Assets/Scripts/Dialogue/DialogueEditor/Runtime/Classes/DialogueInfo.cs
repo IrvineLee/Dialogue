@@ -12,23 +12,23 @@ namespace DialogueEditor.Runtime.Classes
 	{
 		[SerializeField] string characterName = "";
 		[SerializeField] Sprite characterPotrait;
-		[SerializeField] PotraitFaceImageDirection potraitFaceImageDirection;
+		[SerializeField] PotraitFacingDirection potraitFacingDirection;
 
-		[SerializeField] List<LanguageGeneric<string>> textList = new List<LanguageGeneric<string>>();
-		[SerializeField] List<LanguageGeneric<AudioClip>> audioClipList = new List<LanguageGeneric<AudioClip>>();
+		[SerializeField] List<LanguageGeneric<string>> textLanguageList = new List<LanguageGeneric<string>>();
+		[SerializeField] List<LanguageGeneric<AudioClip>> audioClipLanguageList = new List<LanguageGeneric<AudioClip>>();
 		[SerializeField] List<DialogueNodePort> dialogueNodePortList = new List<DialogueNodePort>();
 
 		public string CharacterName { get => characterName; }
 		public Sprite CharacterPotrait { get => characterPotrait; }
-		public PotraitFaceImageDirection PotraitFaceImageDirection { get => potraitFaceImageDirection; }
+		public PotraitFacingDirection PotraitFacingDirection { get => potraitFacingDirection; }
 
-		public List<LanguageGeneric<string>> TextList { get => textList; }
-		public List<LanguageGeneric<AudioClip>> AudioClipList { get => audioClipList; }
+		public List<LanguageGeneric<string>> TextLanguageList { get => textLanguageList; }
+		public List<LanguageGeneric<AudioClip>> AudioClipList { get => audioClipLanguageList; }
 		public List<DialogueNodePort> DialogueNodePortList { get => dialogueNodePortList; }
 
 		public void SetCharacterName(string characterName) { this.characterName = characterName; }
 		public void SetCharacterPotrait(Sprite characterPotrait) { this.characterPotrait = characterPotrait; }
-		public void SetPotraitFaceImageDirection(PotraitFaceImageDirection potraitFaceImageDirection) { this.potraitFaceImageDirection = potraitFaceImageDirection; }
+		public void SetPotraitFacingDirection(PotraitFacingDirection potraitFacingDirection) { this.potraitFacingDirection = potraitFacingDirection; }
 
 		public DialogueInfo() { }
 
@@ -36,21 +36,21 @@ namespace DialogueEditor.Runtime.Classes
 		{
 			characterName = dialogueInfo.characterName;
 			characterPotrait = dialogueInfo.characterPotrait;
-			potraitFaceImageDirection = dialogueInfo.potraitFaceImageDirection;
+			potraitFacingDirection = dialogueInfo.potraitFacingDirection;
 
-			textList = dialogueInfo.textList;
-			audioClipList = dialogueInfo.audioClipList;
+			textLanguageList = dialogueInfo.textLanguageList;
+			audioClipLanguageList = dialogueInfo.audioClipLanguageList;
 			dialogueNodePortList = new List<DialogueNodePort>(dialogueInfo.dialogueNodePortList);
 		}
 
-		public void SetTextList(List<LanguageGeneric<string>> textList) { this.textList = textList; }
+		public void SetTextList(List<LanguageGeneric<string>> textLanguageList) { this.textLanguageList = textLanguageList; }
 
-		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipList) { this.audioClipList = audioClipList; }
+		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipLanguageList) { this.audioClipLanguageList = audioClipLanguageList; }
 
-		public void UpdateLanguage(List<LanguageGeneric<string>> textList, List<LanguageGeneric<AudioClip>> audioClipList)
+		public void UpdateLanguage(List<LanguageGeneric<string>> textLanguageList, List<LanguageGeneric<AudioClip>> audioClipLanguageList)
 		{
-			SetTextList(textList);
-			SetAudioList(audioClipList);
+			SetTextList(textLanguageList);
+			SetAudioList(audioClipLanguageList);
 		}
 	}
 }

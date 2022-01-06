@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DialogueEditor.Runtime.Enums.Nodes
 {
-	public enum PotraitFaceImageDirection
+	public enum PotraitFacingDirection
 	{
 		Left = 0,
 		Right,

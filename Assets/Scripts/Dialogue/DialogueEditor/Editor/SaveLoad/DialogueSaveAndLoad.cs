@@ -99,7 +99,7 @@ namespace DialogueEditor.Editor.SaveLoad
 
 				foreach (Edge edge in edgeList)
 				{
-					if (edge.output == nodePort.MyPort)
+					if (edge.output.portName == nodePort.PortGuid)
 					{
 						string inputGuid = ((BaseNode)edge.input.node).NodeGuid;
 						string outputGuid = ((BaseNode)edge.output.node).NodeGuid;
@@ -122,7 +122,7 @@ namespace DialogueEditor.Editor.SaveLoad
 
 		EventNodeData SaveNodeData(EventNode node)
 		{
-			EventNodeData eventNodeData = new EventNodeData(node.DialogueEvent);
+			EventNodeData eventNodeData = new EventNodeData(node.EventStringIDDataList, node.EventScriptableObjectDataList);
 			eventNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
 
 			return eventNodeData;
@@ -172,7 +172,16 @@ namespace DialogueEditor.Editor.SaveLoad
 			{
 				EventNode eventNode = graphView.CreateEventNode(node.Position);
 				eventNode.SetNodeGuid(node.NodeGuid);
-				eventNode.SetDialogueEventSO(node.DialogueEventSO);
+
+				foreach (EventStringIDData eventStringIDData in node.EventStringIDDataList)
+				{
+					eventNode.AddStringEvent(eventStringIDData);
+				}
+
+				foreach (EventScriptableObjectData eventScriptableObjectData in node.EventScriptableObjectDataList)
+				{
+					eventNode.AddScriptableEvent(eventScriptableObjectData);
+				}
 
 				graphView.AddElement(eventNode);
 			}
@@ -189,6 +198,7 @@ namespace DialogueEditor.Editor.SaveLoad
 
 		void ConnectNodes(DialogueContainerSO dialogueContainerSO)
 		{
+			// Make connections for all nodes, except for dialogue nodes.
 			foreach (BaseNode baseNode in nodeList)
 			{
 				List<NodeLinkData> connectionList = dialogueContainerSO.NodeLinkDataList.Where(edge => edge.BaseNodeGuid == baseNode.NodeGuid).ToList();
@@ -206,6 +216,7 @@ namespace DialogueEditor.Editor.SaveLoad
 				}
 			}
 
+			// Make connection for dialogue nodes.
 			List<DialogueNode> dialogueNodeList = nodeList.FindAll(node => node is DialogueNode).Cast<DialogueNode>().ToList();
 			foreach (DialogueNode dialogueNode in dialogueNodeList)
 			{
@@ -214,7 +225,21 @@ namespace DialogueEditor.Editor.SaveLoad
 					if (nodePort.InputGuid == string.Empty) continue;
 
 					BaseNode targetNode = nodeList.First(node => node.NodeGuid == nodePort.InputGuid);
-					LinkNodesTogether((Port)targetNode.inputContainer[0], nodePort.MyPort);
+
+					Port myPort = null;
+
+					// Check all ports in nodes outpout container.
+					for (int i = 0; i < dialogueNode.outputContainer.childCount; i++)
+					{
+						// Find port with same ID, we use portName as ID
+						if (dialogueNode.outputContainer[i].Q<Port>().portName == nodePort.PortGuid)
+						{
+							myPort = dialogueNode.outputContainer[i].Q<Port>();
+						}
+					}
+
+					// Make connection between the ports.
+					LinkNodesTogether((Port)targetNode.inputContainer[0], myPort);
 				}
 			}
 		}

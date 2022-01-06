@@ -13,24 +13,26 @@ namespace DialogueEditor.Editor.GraphView
 		DialogueEditorWindow editorWindow;
 		DialogueGraphView graphView;
 
-		Texture2D picture;
+		Texture2D iconImage;
 
 		public void Configure(DialogueEditorWindow editorWindow, DialogueGraphView graphView)
 		{
 			this.editorWindow = editorWindow;
 			this.graphView = graphView;
 
-			picture = new Texture2D(1, 1);
-			picture.SetPixel(0, 0, new Color(0, 0, 0, 0));
-			picture.Apply();
+			// Icon image that we don't really use.
+			// Use it to create space left of the text.
+			iconImage = new Texture2D(1, 1);
+			iconImage.SetPixel(0, 0, new Color(0, 0, 0, 0));
+			iconImage.Apply();
 		}
 
 		public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
 		{
 			List<SearchTreeEntry> searchTreeEntryList = new List<SearchTreeEntry>
 			{
-				new SearchTreeGroupEntry(new GUIContent("DialogueNode"), 0),
-				new SearchTreeGroupEntry(new GUIContent("DialogueNode"), 1),
+				new SearchTreeGroupEntry(new GUIContent("Dialogue Editor"), 0),
+				new SearchTreeGroupEntry(new GUIContent("Dialogue Node"), 1),
 
 				AddNodeSearch("Start Node", new StartNode()),
 				AddNodeSearch("Dialogue Node", new DialogueNode()),
@@ -42,9 +44,11 @@ namespace DialogueEditor.Editor.GraphView
 
 		public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
 		{
+			// Get mouse position on the screen.
 			Vector2 mousePosition = editorWindow.rootVisualElement.ChangeCoordinatesTo
 				(editorWindow.rootVisualElement.parent, context.screenMousePosition - editorWindow.position.position);
 
+			// Use the mouse position to calculate where it is in the graph view.
 			Vector2 graphMousePosition = graphView.contentViewContainer.WorldToLocal(mousePosition);
 
 			return CheckForNodeType(searchTreeEntry, graphMousePosition);
@@ -52,7 +56,7 @@ namespace DialogueEditor.Editor.GraphView
 
 		SearchTreeEntry AddNodeSearch(string name, BaseNode baseNode)
 		{
-			SearchTreeEntry searchTreeEntry = new SearchTreeEntry(new GUIContent(name, picture))
+			SearchTreeEntry searchTreeEntry = new SearchTreeEntry(new GUIContent(name, iconImage))
 			{
 				level = 2,
 				userData = baseNode,

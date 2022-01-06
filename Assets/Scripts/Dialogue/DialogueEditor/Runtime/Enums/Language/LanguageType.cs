@@ -14,6 +14,6 @@ namespace DialogueEditor.Runtime.Enums.Language
 		Spanish,
 		TraditionalChinese,
 		Latin,
-		Danish
+		Danish,
 	}
 }

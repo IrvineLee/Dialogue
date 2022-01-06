@@ -12,7 +12,7 @@ namespace DialogueEditor.Editor.GraphView
 {
 	public class DialogueGraphView : UnityEditor.Experimental.GraphView.GraphView
 	{
-		string stypeSheetName = "GraphViewStyleSheet";
+		string graphViewStyleSheet = "GraphViewStyleSheet";			// Name of the graph view style sheet.
 		DialogueEditorWindow editorWindow;
 		NodeSearchWindow searchWindow;
 
@@ -20,15 +20,17 @@ namespace DialogueEditor.Editor.GraphView
 		{
 			this.editorWindow = editorWindow;
 
-			StyleSheet styleSheet = Resources.Load<StyleSheet>(stypeSheetName);
-			styleSheets.Add(styleSheet);
-
+			// Add the ability to zoom in an out graph view.
 			SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
-			this.AddManipulator(new ContentDragger());
-			this.AddManipulator(new SelectionDragger());
-			this.AddManipulator(new RectangleSelector());
-			this.AddManipulator(new FreehandSelector());
+			// Add style sheet to graph view.
+			StyleSheet styleSheet = Resources.Load<StyleSheet>(graphViewStyleSheet);
+			styleSheets.Add(styleSheet);
+
+			this.AddManipulator(new ContentDragger());		// Ability to drag nodes around.
+			this.AddManipulator(new SelectionDragger());	// Ability to drag all selected nodes around.
+			this.AddManipulator(new RectangleSelector());	// Ability to drag select a rectangle area.
+			this.AddManipulator(new FreehandSelector());	// Ability to select a single node.
 
 			GridBackground grid = new GridBackground();
 			Insert(0, grid);
@@ -37,6 +39,8 @@ namespace DialogueEditor.Editor.GraphView
 			AddSearchWindow();
 		}
 
+		// Override the graph view.
+		// This is where we tell the graph view whic nodes can connect to each other.
 		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
 		{
 			List<Port> compatiblePorts = new List<Port>();
@@ -46,44 +50,47 @@ namespace DialogueEditor.Editor.GraphView
 			{
 				Port portView = port;
 
+				// 1st: Cannot connect to itself.
+				// 2nd: Cannot connect to a port on the same node.
+				// 3rd: Input node cannot connect to input node and output node cannot connect to output node.
 				if (startPortView != portView && startPortView.node != portView.node && startPortView.direction != port.direction)
 					compatiblePorts.Add(port);
 			});
 
+			// Return all acceptable ports.
 			return compatiblePorts;
 		}
 
-		public void LanguageReload()
+		/// <summary>
+		/// Reload the current selected language. Used when changing language.
+		/// </summary>
+		public void ReloadLanguage()
 		{
-			List<DialogueNode> dialogueNodeList = nodes.ToList().Where(node => node is DialogueNode).Cast<DialogueNode>().ToList();
-			foreach (DialogueNode dialogueNode in dialogueNodeList)
+			List<BaseNode> allNodeList = nodes.ToList().Where(node => node is BaseNode).Cast<BaseNode>().ToList();
+			foreach (BaseNode node in allNodeList)
 			{
-				dialogueNode.ReloadLanguage();
+				node.ReloadLanguage();
 			}
 		}
 
 		public StartNode CreateStartNode(Vector2 position)
 		{
-			StartNode startNode = new StartNode(position, editorWindow, this);
-			return startNode;
+			return new StartNode(position, editorWindow, this);
 		}
 
 		public EndNode CreateEndNode(Vector2 position)
 		{
-			EndNode endNode = new EndNode(position, editorWindow, this);
-			return endNode;
+			return new EndNode(position, editorWindow, this);
 		}
 
 		public EventNode CreateEventNode(Vector2 position)
 		{
-			EventNode eventNode = new EventNode(position, editorWindow, this);
-			return eventNode;
+			return new EventNode(position, editorWindow, this);
 		}
 
 		public DialogueNode CreateDialogueNode(Vector2 position)
 		{
-			DialogueNode dialogueNode = new DialogueNode(position, editorWindow, this);
-			return dialogueNode;
+			return new DialogueNode(position, editorWindow, this);
 		}
 
 		void AddSearchWindow()

@@ -12,9 +12,9 @@ using DialogueEditor.Editor.GraphView;
 using DialogueEditor.Runtime.Enums.Nodes;
 using DialogueEditor.Runtime.Enums.Language;
 using DialogueEditor.Runtime.Classes;
+using DialogueEditor.Runtime.Classes.Data;
 
 using Character.ScriptableObjects;
-using Character.Profile;
 
 namespace DialogueEditor.Editor.Nodes
 {
@@ -24,12 +24,14 @@ namespace DialogueEditor.Editor.Nodes
 
 		public DialogueInfo DialogueInfo { get => dialogueInfo; }
 
-		ObjectField audioClipField, characterPotraitPreview;
-		TextField textField;
-		EnumField faceImageDirectionField;
+		Image characterPotraitPreview;                          // Character potrait preview.
 
-		PopupField<string> characterNamePopupField;
-		PopupField<Sprite> characterPotraitPopupField;
+		PopupField<string> characterNamePopupField;             // Character name popup.
+		PopupField<Sprite> characterPotraitPopupField;          // Character potrait popup.
+		EnumField potraitFacingtDirectionField;					// Potrait facing direction.
+
+		ObjectField audioClipField;                             // Audio clip field.
+		TextField textLanguageField;                            // Dialogue text field.
 
 		// Character profiles.
 		CharacterProfilesSO characterProfiles;
@@ -54,22 +56,22 @@ namespace DialogueEditor.Editor.Nodes
 
 			foreach (LanguageType language in Enum.GetValues(typeof(LanguageType)))
 			{
-				dialogueInfo.TextList.Add(new LanguageGeneric<string>(language, ""));
+				dialogueInfo.TextLanguageList.Add(new LanguageGeneric<string>(language, ""));
 				dialogueInfo.AudioClipList.Add(new LanguageGeneric<AudioClip>(language, null));
 			}
 
 			CreateMainContainer();
 		}
 
-		public void LoadDialogueNode(Runtime.Classes.Data.DialogueNodeData node)
+		public void LoadDialogueNode(DialogueNodeData node)
 		{
 			dialogueInfo.SetCharacterName(node.DialogueInfo.CharacterName);
 			dialogueInfo.SetCharacterPotrait(node.DialogueInfo.CharacterPotrait);
-			dialogueInfo.SetPotraitFaceImageDirection(node.DialogueInfo.PotraitFaceImageDirection);
+			dialogueInfo.SetPotraitFacingDirection(node.DialogueInfo.PotraitFacingDirection);
 
-			foreach (LanguageGeneric<string> languageGeneric in node.DialogueInfo.TextList)
+			foreach (LanguageGeneric<string> languageGeneric in node.DialogueInfo.TextLanguageList)
 			{
-				dialogueInfo.TextList.Find(language => language.LanguageType == languageGeneric.LanguageType).SetLanguageGenericType(languageGeneric.LanguageGenericType);
+				dialogueInfo.TextLanguageList.Find(language => language.LanguageType == languageGeneric.LanguageType).SetLanguageGenericType(languageGeneric.LanguageGenericType);
 			}
 
 			foreach (LanguageGeneric<AudioClip> languageGeneric in node.DialogueInfo.AudioClipList)
@@ -83,22 +85,34 @@ namespace DialogueEditor.Editor.Nodes
 			}
 
 			LoadValueIntoField();
+
+			// Update the potrait preview.
+			if (node.DialogueInfo.CharacterPotrait)
+				characterPotraitPreview.image = node.DialogueInfo.CharacterPotrait.texture;
+
+			// Update the popup choices.
+			List<Sprite> spriteList = characterProfiles.GetCharacterSpriteList(dialogueInfo.CharacterName);
+			if (spriteList != null)
+				characterPotraitPopupField.choices = spriteList;
 		}
 
-		public void ReloadLanguage()
+		public override void ReloadLanguage()
 		{
-			textField.RegisterValueChangedCallback(value =>
+			// Text.
+			textLanguageField.RegisterValueChangedCallback(value =>
 			{
-				SetLanguageGenericType(dialogueInfo.TextList, value.newValue);
+				SetLanguageGenericType(dialogueInfo.TextLanguageList, value.newValue);
 			});
-			textField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextList));
+			textLanguageField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextLanguageList));
 
+			// Audio.
 			audioClipField.RegisterValueChangedCallback(value =>
 			{
 				SetLanguageGenericType(dialogueInfo.AudioClipList, (AudioClip)value.newValue);
 			});
 			audioClipField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.AudioClipList));
 
+			// Choices.
 			foreach (DialogueNodePort nodePort in dialogueInfo.DialogueNodePortList)
 			{
 				nodePort.TextField.RegisterValueChangedCallback(value =>
@@ -114,9 +128,9 @@ namespace DialogueEditor.Editor.Nodes
 			base.LoadValueIntoField();
 			characterNamePopupField.SetValueWithoutNotify(dialogueInfo.CharacterName);
 			characterPotraitPopupField.SetValueWithoutNotify(dialogueInfo.CharacterPotrait);
-			faceImageDirectionField.SetValueWithoutNotify(dialogueInfo.PotraitFaceImageDirection);
+			potraitFacingtDirectionField.SetValueWithoutNotify(dialogueInfo.PotraitFacingDirection);
 			audioClipField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.AudioClipList));
-			textField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextList));
+			textLanguageField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextLanguageList));
 		}
 
 		public Port AddChoicePort(BaseNode baseNode, DialogueNodePort dialogueNodePort = null)
@@ -132,20 +146,21 @@ namespace DialogueEditor.Editor.Nodes
 
 		void SetLanguageGenericType<T>(List<LanguageGeneric<T>> languageGeneric, T newValue)
 		{
-			languageGeneric.Find(value => value.LanguageType == editorWindow.LanguageType).SetLanguageGenericType(newValue);
+			languageGeneric.Find(value => value.LanguageType == editorWindow.SelectedLanguage).SetLanguageGenericType(newValue);
 		}
 
 		T GetLanguageGenericType<T>(List<LanguageGeneric<T>> languageGeneric)
 		{
-			return (T)(object)languageGeneric.Find(value => value.LanguageType == editorWindow.LanguageType).LanguageGenericType;
+			return (T)(object)languageGeneric.Find(value => value.LanguageType == editorWindow.SelectedLanguage).LanguageGenericType;
 		}
 
 		void CreateMainContainer()
 		{
 			ResoucesLoadCharacterProfile();
+			CreatePotraitPreview();
 			CreateTextName();
-			CreateFaceImage();
-			CreateFaceImageEnum();
+			CreatePotraitSelector();
+			CreatePotraitFacingSelector();
 			CreateAudioClip();
 			CreateTextBox();
 			CreateAddChoiceButton();
@@ -158,7 +173,7 @@ namespace DialogueEditor.Editor.Nodes
 			characterSpriteList = new List<Sprite>(characterProfiles.GetCharacterSpriteList());
 		}
 
-		void CreateFaceImage()
+		void CreatePotraitPreview()
 		{
 			// Potrait Name.
 			Label labelText = new Label("Potrait");
@@ -166,35 +181,42 @@ namespace DialogueEditor.Editor.Nodes
 			labelText.AddToClassList("Label");
 			mainContainer.Add(labelText);
 
-			//characterPotraitPreview = new ObjectField()
-			//{
-			//	objectType = typeof(Sprite),
-			//	allowSceneObjects = false,
-			//	value = dialogueInfo.CharacterPotrait,
-			//};
-			//characterPotraitPreview.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
-			//characterPotraitPreview.
+			// Potrait Image.
+			characterPotraitPreview = new Image();
+			characterPotraitPreview.AddToClassList("potraitPreview");
 			mainContainer.Add(characterPotraitPreview);
+		}
 
+		void CreatePotraitSelector()
+		{
+			// Potrait Selector Name.
+			Label labelText = new Label("Potrait Selector");
+			labelText.AddToClassList("potraitSelectorText");
+			labelText.AddToClassList("Label");
+			mainContainer.Add(labelText);
+
+			// Potrait Selector.
 			characterPotraitPopupField = new PopupField<Sprite>(characterSpriteList, 0);
 			characterPotraitPopupField.RegisterValueChangedCallback(value =>
 			{
 				Sprite sprite = characterProfiles.GetCharacterSprite(dialogueInfo.CharacterName, ((UnityEngine.Object)(object)value.newValue).name);
 				dialogueInfo.SetCharacterPotrait(sprite);
+
+				characterPotraitPreview.image = sprite != null ? sprite.texture : null;
 			});
 			characterPotraitPopupField.SetValueWithoutNotify(dialogueInfo.CharacterPotrait);
 			characterPotraitPopupField.AddToClassList("Potrait");
-			mainContainer.Add(characterPotraitPopupField);
 
+			mainContainer.Add(characterPotraitPopupField);
 		}
 
-		void CreateFaceImageEnum()
+		void CreatePotraitFacingSelector()
 		{
-			// Face Image Enum.
-			faceImageDirectionField = new EnumField() { value = dialogueInfo.PotraitFaceImageDirection };
-			faceImageDirectionField.Init(dialogueInfo.PotraitFaceImageDirection);
-			faceImageDirectionField.RegisterValueChangedCallback(value => dialogueInfo.SetPotraitFaceImageDirection((PotraitFaceImageDirection)value.newValue));
-			mainContainer.Add(faceImageDirectionField);
+			// Potrait Facing Direction.
+			potraitFacingtDirectionField = new EnumField() { value = dialogueInfo.PotraitFacingDirection };
+			potraitFacingtDirectionField.Init(dialogueInfo.PotraitFacingDirection);
+			potraitFacingtDirectionField.RegisterValueChangedCallback(value => dialogueInfo.SetPotraitFacingDirection((PotraitFacingDirection)value.newValue));
+			mainContainer.Add(potraitFacingtDirectionField);
 		}
 
 		void CreateAudioClip()
@@ -210,7 +232,7 @@ namespace DialogueEditor.Editor.Nodes
 			{
 				objectType = typeof(AudioClip),
 				allowSceneObjects = false,
-				value = dialogueInfo.AudioClipList.Find(audioClip => audioClip.LanguageType == editorWindow.LanguageType).LanguageGenericType,
+				value = dialogueInfo.AudioClipList.Find(audioClip => audioClip.LanguageType == editorWindow.SelectedLanguage).LanguageGenericType,
 			};
 			audioClipField.RegisterValueChangedCallback(value =>
 			{
@@ -232,7 +254,7 @@ namespace DialogueEditor.Editor.Nodes
 			characterNamePopupField.RegisterValueChangedCallback(value =>
 			{
 				dialogueInfo.SetCharacterName(value.newValue);
-				
+
 				characterSpriteList = new List<Sprite>(characterProfiles.GetCharacterSpriteList(value.newValue));
 				characterPotraitPopupField.choices = characterSpriteList;
 				characterPotraitPopupField.index = 0;
@@ -250,16 +272,16 @@ namespace DialogueEditor.Editor.Nodes
 			labelText.AddToClassList("Label");
 			mainContainer.Add(labelText);
 
-			textField = new TextField("");
-			textField.RegisterValueChangedCallback(value =>
+			textLanguageField = new TextField("");
+			textLanguageField.RegisterValueChangedCallback(value =>
 			{
-				SetLanguageGenericType(dialogueInfo.TextList, value.newValue);
+				SetLanguageGenericType(dialogueInfo.TextLanguageList, value.newValue);
 			});
-			textField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextList));
-			textField.multiline = true;
+			textLanguageField.SetValueWithoutNotify(GetLanguageGenericType(dialogueInfo.TextLanguageList));
+			textLanguageField.multiline = true;
 
-			textField.AddToClassList("TextBox");
-			mainContainer.Add(textField);
+			textLanguageField.AddToClassList("TextBox");
+			mainContainer.Add(textLanguageField);
 		}
 
 		void CreateAddChoiceButton()
@@ -276,7 +298,6 @@ namespace DialogueEditor.Editor.Nodes
 			string outputPortName = $"Choice {outputPortCount + 1}";
 
 			Port port = GetPortInstance(Direction.Output);
-			port.portName = "";
 
 			string portGuid = Guid.NewGuid().ToString();
 			string inputGuid = "", outputGuid = "";
@@ -313,7 +334,12 @@ namespace DialogueEditor.Editor.Nodes
 			port.contentContainer.Add(textField);
 			port.contentContainer.Add(deleteButton);
 
-			DialogueNodePort newDialogueNodePort = new DialogueNodePort(portGuid, inputGuid, outputGuid, port, textField, textLanguageList);
+			DialogueNodePort newDialogueNodePort = new DialogueNodePort(portGuid, inputGuid, outputGuid, textField, textLanguageList);
+			port.portName = newDialogueNodePort.PortGuid;
+
+			Label portNameLabel = port.contentContainer.Q<Label>("type");
+			portNameLabel.AddToClassList("PortName");
+
 			dialogueInfo.DialogueNodePortList.Add(newDialogueNodePort);
 
 			return port;
@@ -321,7 +347,7 @@ namespace DialogueEditor.Editor.Nodes
 
 		void DeletePort(BaseNode node, Port port)
 		{
-			DialogueNodePort temp = dialogueInfo.DialogueNodePortList.Find(value => value.MyPort == port);
+			DialogueNodePort temp = dialogueInfo.DialogueNodePortList.Find(value => value.PortGuid == port.portName);
 			dialogueInfo.DialogueNodePortList.Remove(temp);
 
 			IEnumerable<Edge> portEdge = graphView.edges.ToList().Where(edge => edge.output == port);

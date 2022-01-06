@@ -20,7 +20,7 @@ namespace DialogueEditor.Runtime.Classes.Data
 
 		public string GetTextLanguageGenericTypeRuntime()
 		{
-			return dialogueInfo.TextList.Find(text => text.LanguageType == LanguageController.sSingleton.LanguageType).LanguageGenericType;
+			return dialogueInfo.TextLanguageList.Find(text => text.LanguageType == LanguageController.sSingleton.LanguageType).LanguageGenericType;
 		}
 
 		public AudioClip GetAudioLanguageGenericTypeRuntime()
@@ -28,20 +28,19 @@ namespace DialogueEditor.Runtime.Classes.Data
 			return dialogueInfo.AudioClipList.Find(clip => clip.LanguageType == LanguageController.sSingleton.LanguageType).LanguageGenericType;
 		}
 
-		public void SetTextLanguageGenericType(List<LanguageGeneric<string>> textList)
+		public void SetTextLanguageGenericType(List<LanguageGeneric<string>> textLanguageList)
 		{
-			dialogueInfo.SetTextList(textList);
+			dialogueInfo.SetTextList(textLanguageList);
 		}
 
-		public void SetAudioLanguageGenericType(List<LanguageGeneric<AudioClip>> audioClipList)
+		public void SetAudioLanguageGenericType(List<LanguageGeneric<AudioClip>> audioClipLanguageList)
 		{
-			dialogueInfo.SetAudioList(audioClipList);
+			dialogueInfo.SetAudioList(audioClipLanguageList);
 		}
 
-		public void UpdateLanguage(List<LanguageGeneric<string>> textList, List<LanguageGeneric<AudioClip>> audioClipList)
+		public void UpdateLanguage(List<LanguageGeneric<string>> textLanguageList, List<LanguageGeneric<AudioClip>> audioClipLanguageList)
 		{
-			SetTextLanguageGenericType(textList);
-			SetAudioLanguageGenericType(audioClipList);
+			dialogueInfo.UpdateLanguage(textLanguageList, audioClipLanguageList);
 		}
 	}
 }

@@ -1,0 +1,21 @@
+Guid ID,English,German,Italian,Japanese,Korean,Portuguese,Russian,SimplifiedChinese,Spanish,TraditionalChinese,Latin,Danish
+9109f612-9f79-47aa-b5b1-8ca352480ee9,What do you want to color?,,,,,,WER,,,,,Test this out
+29170c6a-0148-4f41-9335-9f483ef33820,Color player,Choice 1,,,,,REW,,,,,cho1
+c1112a94-bc18-490b-a588-bdbc94fd8918,Color NPC,Choice 2,,,,,EWR,,,,,cho2
+3691b993-5322-43aa-85a8-c5a01204e2fd,Go back,Choice 3,,,,,WER,,,,,cho3
+2c93fd71-aec2-4525-b17c-e7a9c850e22e,"I  am  a random NPC.
+You?",,,,,,REW,,,,,YOU ARE DAMNED!
+0cd40bba-5a93-4fa2-b3b1-e6350f2edfea,Continue,Choice 1,,,,,EWR,,,,,
+3002bf2b-6935-453d-9fc9-663fb6cc9f34,Is it any fun to be the player?,,,,,,WER,,,,,
+dcd46972-2895-4f83-b89e-c10d3d3ca0a4,Yes,Choice 1,,,,,REW,,,,,
+e409d5f1-83ac-4d84-8b22-12cad2c0df81,No,Choice 2,,,,,EWR,,,,,
+f3398d83-6296-4bdb-b7ef-d4aca5c410c9,"Yes, it is really fun!",,,,,,WER,,,,,
+021987ed-5fdc-4dc1-83a9-18005abd1a33,Choice 1,Choice 1,,,,,REW,,,,,
+fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f,I am supposed to be the player,,,,,,EWR,,,,,
+0cc1f711-7316-4cd7-acff-f780c98a6545,Continue,Choice 1,,,,,WER,,,,,
+ac8fdffd-c27a-46b1-82dd-d11a885c51f6,"No, not really...",,,,,,REW,,,,,
+4be5df59-9b7e-4eb4-be7a-2a48e9851802,Choice 1,Choice 1,,,,,EWR,,,,,
+f2e93305-bb8d-4126-827e-6ef1f908701c,Yes?,,,,,,WER,,,,,
+89f042f4-1401-458f-b0e4-3d89051fc53d,Who are you?,Choice 1,,,,,REW,,,,,
+d0799bc5-fd67-429c-90e8-dad51179d3c9,I want to color stuff,Choice 2,,,,,EWR,,,,,
+30d4d5af-39ca-4b57-bd04-75002e73ef82,Bye,Choice 3,,,,,,,,,,

@@ -6,15 +6,19 @@ using DialogueEditor.Runtime.ScriptableObjects;
 namespace DialogueEditor.Runtime.Classes.Data
 {
 	[Serializable]
-	public class EventNodeData : BaseNodeData
+	public class EventScriptableObjectData
 	{
 		[SerializeField] DialogueEventSO dialogueEventSO;
 
 		public DialogueEventSO DialogueEventSO { get => dialogueEventSO; }
 
-		public EventNodeData(DialogueEventSO dialogueEventSO)
+		public EventScriptableObjectData() { }
+
+		public EventScriptableObjectData(DialogueEventSO dialogueEventSO)
 		{
 			this.dialogueEventSO = dialogueEventSO;
 		}
+
+		public void SetDialogueEventSO(DialogueEventSO dialogueEventSO) { this.dialogueEventSO = dialogueEventSO; }
 	}
 }

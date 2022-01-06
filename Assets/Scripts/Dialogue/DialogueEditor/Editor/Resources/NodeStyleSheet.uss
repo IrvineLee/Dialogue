@@ -13,4 +13,42 @@
 	margin-top: 5px;
 	margin-left: 4px;
 	font-size: 15px;
+	-unity-font-style: bold;
+}
+
+.PortName
+{
+	display: none;
+}
+
+.potraitPreview
+{
+	height: 100px;
+	width: 100px;
+	margin: auto;
+}
+
+.EventBox
+{
+	flex-direction: row;
+}
+
+.EventText
+{
+	min-width: 180px;
+}
+
+.EventInt
+{
+	min-width: 40px;
+}
+
+.EventObject
+{
+
+}
+
+.DeleteButton
+{
+	margin-left: auto;
 }

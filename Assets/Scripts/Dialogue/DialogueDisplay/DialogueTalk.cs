@@ -65,7 +65,7 @@ namespace DialogueDisplay
 			}
 
 			dialogueController.SetText(nodeData.DialogueInfo.CharacterName, nodeData.GetTextLanguageGenericTypeRuntime());
-			dialogueController.SetImage(nodeData.DialogueInfo.CharacterPotrait, nodeData.DialogueInfo.PotraitFaceImageDirection);
+			dialogueController.SetImage(nodeData.DialogueInfo.CharacterPotrait, nodeData.DialogueInfo.PotraitFacingDirection);
 			
 			MakeButtons(nodeData.DialogueInfo.DialogueNodePortList);
 			audioSource.clip = nodeData.GetAudioLanguageGenericTypeRuntime();
@@ -74,9 +74,10 @@ namespace DialogueDisplay
 
 		void RunNode(EventNodeData nodeData)
 		{
-			if (nodeData.DialogueEventSO)
+			foreach (EventScriptableObjectData scriptableObjectData in nodeData.EventScriptableObjectDataList)
 			{
-				nodeData.DialogueEventSO.RunEvent();
+				if (scriptableObjectData.DialogueEventSO)
+					scriptableObjectData.DialogueEventSO.RunEvent();
 			}
 			CheckNodeType(GetNextNode(nodeData));
 		}

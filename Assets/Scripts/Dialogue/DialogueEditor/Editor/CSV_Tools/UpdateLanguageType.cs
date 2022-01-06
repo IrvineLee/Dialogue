@@ -19,7 +19,7 @@ public class UpdateLanguageType
 		{
 			foreach (DialogueNodeData nodeData in dialogueContainer.DialogueNodeDataList)
 			{
-				List<LanguageGeneric<string>> textList = UpdateLanguageGeneric(nodeData.DialogueInfo.TextList);
+				List<LanguageGeneric<string>> textList = UpdateLanguageGeneric(nodeData.DialogueInfo.TextLanguageList);
 				List<LanguageGeneric<AudioClip>> audioClipList = UpdateLanguageGeneric(nodeData.DialogueInfo.AudioClipList);
 				nodeData.UpdateLanguage(textList, audioClipList);
 

@@ -32,17 +32,17 @@ namespace DialogueDisplay
 			dialogueBox?.SetText(name, text);
 		}
 
-		public void SetImage(Sprite sprite, PotraitFaceImageDirection dialogueFaceImageDirection)
+		public void SetImage(Sprite sprite, PotraitFacingDirection dialogueFaceImageDirection)
 		{
 			// TODO: Potrait setting
 			if (sprite)
 			{
-				if (dialogueFaceImageDirection == PotraitFaceImageDirection.Left)
+				if (dialogueFaceImageDirection == PotraitFacingDirection.Left)
 				{
 					GameObject leftImageGO = potraitParent.GetChild(0).GetChild(0).gameObject;
 					leftImageGO.GetComponent<Image>().sprite = sprite;
 				}
-				else if (dialogueFaceImageDirection == PotraitFaceImageDirection.Right)
+				else if (dialogueFaceImageDirection == PotraitFacingDirection.Right)
 				{
 					GameObject rightImageGO = potraitParent.GetChild(0).GetChild(1).gameObject;
 					rightImageGO.GetComponent<Image>().sprite = sprite;

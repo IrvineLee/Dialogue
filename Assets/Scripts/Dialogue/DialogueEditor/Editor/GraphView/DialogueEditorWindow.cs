@@ -14,22 +14,27 @@ namespace DialogueEditor.Editor.GraphView
 {
 	public class DialogueEditorWindow : EditorWindow
 	{
-		DialogueContainerSO currentDialogueContainer;
-		DialogueGraphView graphView;
-		DialogueSaveAndLoad saveAndLoad;
+		DialogueContainerSO currentDialogueContainer;			// Current open dialogue container in dialogue editor window.
+		DialogueGraphView graphView;							// Reference to GraphView Class.
+		DialogueSaveAndLoad saveAndLoad;						// Reference to SaveAndLoad Class.
 
-		ToolbarMenu toolbarMenu;
-		Label nameOfDialogueContainer;
+		ToolbarMenu languageDropDownMenu;						// Language toolbar menu in the toop of the dialogue editor window.
+		Label nameOfDialogueContainer;							// Name of the current open dialogue container.
+		string graphViewStyleSheet = "GraphViewStyleSheet";		// Name of the graph view style sheet.
 
-		LanguageType languageType = LanguageType.English;
+		LanguageType selectedLanguage = LanguageType.English;   // Current selected language in the dialogue editor window.
 
-		public LanguageType LanguageType { get => languageType; }
+		public LanguageType SelectedLanguage { get => selectedLanguage; }
 
-		[OnOpenAsset(1)]
+		// Callback attribute for opening an asset in Unity (e.g the callback is fired when double clicking an asset in the Project Browser).
+		// Read More : https://docs.unity3d.com/ScriptReference/Callbacks.OnOpenAssetAttribute.html
+		[OnOpenAsset(0)]
 		public static bool ShowWindow(int instanceID, int line)
 		{
+			// Get the currently selected item.
 			UnityEngine.Object obj = EditorUtility.InstanceIDToObject(instanceID);
 
+			// Load up the window.
 			if (obj is DialogueContainerSO)
 			{
 				DialogueEditorWindow window = (DialogueEditorWindow)GetWindow(typeof(DialogueEditorWindow));
@@ -56,6 +61,7 @@ namespace DialogueEditor.Editor.GraphView
 
 		void ConstructGraphView()
 		{
+			// Create a Dialogue Graph View.
 			graphView = new DialogueGraphView(this);
 			graphView.StretchToParentSize();
 			rootVisualElement.Add(graphView);
@@ -63,9 +69,13 @@ namespace DialogueEditor.Editor.GraphView
 			saveAndLoad = new DialogueSaveAndLoad(graphView);
 		}
 
+		/// <summary>
+		/// Generate the tollbar you will see in the top left of the dialogue editor window.
+		/// </summary>
 		void GenerateToolbar()
 		{
-			StyleSheet styleSheet = Resources.Load<StyleSheet>("GraphViewStyleSheet");
+			// Set the style sheet.
+			StyleSheet styleSheet = Resources.Load<StyleSheet>(graphViewStyleSheet);
 			rootVisualElement.styleSheets.Add(styleSheet);
 
 			Toolbar toolbar = new Toolbar();
@@ -81,12 +91,13 @@ namespace DialogueEditor.Editor.GraphView
 			toolbar.Add(loadBtn);
 
 			// Dropdown menu for languages.
-			toolbarMenu = new ToolbarMenu();
+			languageDropDownMenu = new ToolbarMenu();
 			foreach (LanguageType language in Enum.GetValues(typeof(LanguageType)))
 			{
-				toolbarMenu.menu.AppendAction(language.ToString(), new Action<DropdownMenuAction>(x => SetLanguage(language, toolbarMenu)));
+				// Set the correct language when you select from the drop down menu.
+				languageDropDownMenu.menu.AppendAction(language.ToString(), new Action<DropdownMenuAction>(x => SetLanguage(language)));
 			}
-			toolbar.Add(toolbarMenu);
+			toolbar.Add(languageDropDownMenu);
 
 			// Name of current DialogueContainer you have opened.
 			nameOfDialogueContainer = new Label("");
@@ -96,27 +107,37 @@ namespace DialogueEditor.Editor.GraphView
 			rootVisualElement.Add(toolbar);
 		}
 
+		/// <summary>
+		/// Will load in current selected dialogue container.
+		/// </summary>
 		void Load()
 		{
 			if (currentDialogueContainer)
 			{
-				SetLanguage(LanguageType.English, toolbarMenu);
+				SetLanguage(LanguageType.English);
 				nameOfDialogueContainer.text = "Name:   " + currentDialogueContainer.name;
 				saveAndLoad.Load(currentDialogueContainer);
 			}
 		}
 
+		/// <summary>
+		/// Will save in current selected dialogue container.
+		/// </summary>
 		void Save()
 		{
 			if (currentDialogueContainer)
 				saveAndLoad.Save(currentDialogueContainer);
 		}
 
-		void SetLanguage(LanguageType language, ToolbarMenu toolbarMenu)
+		/// <summary>
+		/// Will change the language in the dialogue editor window.
+		/// </summary>
+		/// <param name="language"> Language you wanna change to </param>
+		void SetLanguage(LanguageType language)
 		{
-			toolbarMenu.text = "Language: " + language.ToString();
-			languageType = language;
-			graphView.LanguageReload();
+			languageDropDownMenu.text = "Language: " + language.ToString();
+			selectedLanguage = language;
+			graphView.ReloadLanguage();
 		}
 	}
 }

@@ -45,5 +45,7 @@ namespace DialogueEditor.Editor.Nodes
 		}
 
 		public virtual void LoadValueIntoField() { }
+
+		public virtual void ReloadLanguage() { }
 	}
 }

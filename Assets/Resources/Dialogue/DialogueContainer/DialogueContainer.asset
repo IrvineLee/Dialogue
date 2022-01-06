@@ -15,186 +15,45 @@ MonoBehaviour:
   nodeLinkDataList:
   - baseNodeGuid: 854f6308-8bb5-4159-bffa-18d61d53959a
     targetNodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
-  - baseNodeGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
-    targetNodeGuid: 0d0a86ad-d119-4fc7-b1f1-f0159389075e
   - baseNodeGuid: 44e3a31a-8d10-41d7-841a-a82440682794
     targetNodeGuid: 0d0a86ad-d119-4fc7-b1f1-f0159389075e
+  - baseNodeGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
+    targetNodeGuid: 0d0a86ad-d119-4fc7-b1f1-f0159389075e
+  - baseNodeGuid: 2c93fd71-aec2-4525-b17c-e7a9c850e22e
+    targetNodeGuid: fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f
+  - baseNodeGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
+    targetNodeGuid: d8a77e74-13b1-4b1e-843e-cb13bcaa8bd5
+  - baseNodeGuid: fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f
+    targetNodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
+  - baseNodeGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
+    targetNodeGuid: d8a77e74-13b1-4b1e-843e-cb13bcaa8bd5
   - baseNodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
     targetNodeGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
   - baseNodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
     targetNodeGuid: 44e3a31a-8d10-41d7-841a-a82440682794
   - baseNodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
     targetNodeGuid: 234bfd89-0af9-4e20-a0d0-c040255213ec
-  - baseNodeGuid: 2c93fd71-aec2-4525-b17c-e7a9c850e22e
-    targetNodeGuid: fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f
   - baseNodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
     targetNodeGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
   - baseNodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
     targetNodeGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
-  - baseNodeGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
-    targetNodeGuid: d8a77e74-13b1-4b1e-843e-cb13bcaa8bd5
-  - baseNodeGuid: fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f
-    targetNodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
   - baseNodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
     targetNodeGuid: 2c93fd71-aec2-4525-b17c-e7a9c850e22e
   - baseNodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
     targetNodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
   - baseNodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
     targetNodeGuid: fa3260ae-5d4b-427d-8cdc-72be08b70b9e
-  - baseNodeGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
-    targetNodeGuid: d8a77e74-13b1-4b1e-843e-cb13bcaa8bd5
   startNodeDataList:
   - nodeGuid: 854f6308-8bb5-4159-bffa-18d61d53959a
     position: {x: 356, y: 183.2}
   dialogueNodeDataList:
-  - nodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
-    position: {x: 774.4, y: 133.59999}
-    dialogueInfo:
-      characterName: Female
-      characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
-      - languageType: 0
-        languageGenericType: What do you want to color?
-      - languageType: 1
-        languageGenericType: 
-      - languageType: 2
-        languageGenericType: 
-      - languageType: 3
-        languageGenericType: 
-      - languageType: 4
-        languageGenericType: 
-      - languageType: 5
-        languageGenericType: 
-      - languageType: 6
-        languageGenericType: 
-      - languageType: 7
-        languageGenericType: 
-      - languageType: 8
-        languageGenericType: 
-      - languageType: 9
-        languageGenericType: 
-      - languageType: 10
-        languageGenericType: 
-      - languageType: 11
-        languageGenericType: 
-      audioClipList:
-      - languageType: 0
-        languageGenericType: {fileID: 0}
-      - languageType: 1
-        languageGenericType: {fileID: 0}
-      - languageType: 2
-        languageGenericType: {fileID: 0}
-      - languageType: 3
-        languageGenericType: {fileID: 0}
-      - languageType: 4
-        languageGenericType: {fileID: 0}
-      - languageType: 5
-        languageGenericType: {fileID: 0}
-      - languageType: 6
-        languageGenericType: {fileID: 0}
-      - languageType: 7
-        languageGenericType: {fileID: 0}
-      - languageType: 8
-        languageGenericType: {fileID: 0}
-      - languageType: 9
-        languageGenericType: {fileID: 0}
-      - languageType: 10
-        languageGenericType: {fileID: 0}
-      - languageType: 11
-        languageGenericType: {fileID: 0}
-      dialogueNodePortList:
-      - portGuid: 29170c6a-0148-4f41-9335-9f483ef33820
-        inputGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
-        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
-        textLanguageList:
-        - languageType: 0
-          languageGenericType: Color player
-        - languageType: 1
-          languageGenericType: Choice 1
-        - languageType: 2
-          languageGenericType: Choice 1
-        - languageType: 3
-          languageGenericType: Choice 1
-        - languageType: 4
-          languageGenericType: Choice 1
-        - languageType: 5
-          languageGenericType: Choice 1
-        - languageType: 6
-          languageGenericType: Choice 1
-        - languageType: 7
-          languageGenericType: Choice 1
-        - languageType: 8
-          languageGenericType: Choice 1
-        - languageType: 9
-          languageGenericType: Choice 1
-        - languageType: 10
-          languageGenericType: Choice 1
-        - languageType: 11
-          languageGenericType: Choice 1
-      - portGuid: c1112a94-bc18-490b-a588-bdbc94fd8918
-        inputGuid: 44e3a31a-8d10-41d7-841a-a82440682794
-        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
-        textLanguageList:
-        - languageType: 0
-          languageGenericType: Color NPC
-        - languageType: 1
-          languageGenericType: Choice 2
-        - languageType: 2
-          languageGenericType: Choice 2
-        - languageType: 3
-          languageGenericType: Choice 2
-        - languageType: 4
-          languageGenericType: Choice 2
-        - languageType: 5
-          languageGenericType: Choice 2
-        - languageType: 6
-          languageGenericType: Choice 2
-        - languageType: 7
-          languageGenericType: Choice 2
-        - languageType: 8
-          languageGenericType: Choice 2
-        - languageType: 9
-          languageGenericType: Choice 2
-        - languageType: 10
-          languageGenericType: Choice 2
-        - languageType: 11
-          languageGenericType: Choice 2
-      - portGuid: 3691b993-5322-43aa-85a8-c5a01204e2fd
-        inputGuid: 234bfd89-0af9-4e20-a0d0-c040255213ec
-        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
-        textLanguageList:
-        - languageType: 0
-          languageGenericType: Go back
-        - languageType: 1
-          languageGenericType: Choice 3
-        - languageType: 2
-          languageGenericType: Choice 3
-        - languageType: 3
-          languageGenericType: Choice 3
-        - languageType: 4
-          languageGenericType: Choice 3
-        - languageType: 5
-          languageGenericType: Choice 3
-        - languageType: 6
-          languageGenericType: Choice 3
-        - languageType: 7
-          languageGenericType: Choice 3
-        - languageType: 8
-          languageGenericType: Choice 3
-        - languageType: 9
-          languageGenericType: Choice 3
-        - languageType: 10
-          languageGenericType: Choice 3
-        - languageType: 11
-          languageGenericType: Choice 3
   - nodeGuid: 2c93fd71-aec2-4525-b17c-e7a9c850e22e
     position: {x: 764.8, y: -179.2}
     dialogueInfo:
-      characterName: Female
-      characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
+      characterName: Uto
+      characterPotrait: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      potraitFacingDirection: 0
+      textLanguageList:
       - languageType: 0
         languageGenericType: 'I  am  a random NPC.
 
@@ -210,7 +69,7 @@ MonoBehaviour:
       - languageType: 5
         languageGenericType: 
       - languageType: 6
-        languageGenericType: 
+        languageGenericType: REW
       - languageType: 7
         languageGenericType: 
       - languageType: 8
@@ -220,8 +79,8 @@ MonoBehaviour:
       - languageType: 10
         languageGenericType: 
       - languageType: 11
-        languageGenericType: 
-      audioClipList:
+        languageGenericType: YOU ARE DAMNED!
+      audioClipLanguageList:
       - languageType: 0
         languageGenericType: {fileID: 0}
       - languageType: 1
@@ -256,145 +115,32 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 1
         - languageType: 2
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 1
+          languageGenericType: EWR
         - languageType: 7
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 1
-  - nodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
-    position: {x: 1214.4, y: -172.8}
-    dialogueInfo:
-      characterName: Female
-      characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
-      - languageType: 0
-        languageGenericType: Is it any fun to be the player?
-      - languageType: 1
-        languageGenericType: 
-      - languageType: 2
-        languageGenericType: 
-      - languageType: 3
-        languageGenericType: 
-      - languageType: 4
-        languageGenericType: 
-      - languageType: 5
-        languageGenericType: 
-      - languageType: 6
-        languageGenericType: 
-      - languageType: 7
-        languageGenericType: 
-      - languageType: 8
-        languageGenericType: 
-      - languageType: 9
-        languageGenericType: 
-      - languageType: 10
-        languageGenericType: 
-      - languageType: 11
-        languageGenericType: 
-      audioClipList:
-      - languageType: 0
-        languageGenericType: {fileID: 0}
-      - languageType: 1
-        languageGenericType: {fileID: 0}
-      - languageType: 2
-        languageGenericType: {fileID: 0}
-      - languageType: 3
-        languageGenericType: {fileID: 0}
-      - languageType: 4
-        languageGenericType: {fileID: 0}
-      - languageType: 5
-        languageGenericType: {fileID: 0}
-      - languageType: 6
-        languageGenericType: {fileID: 0}
-      - languageType: 7
-        languageGenericType: {fileID: 0}
-      - languageType: 8
-        languageGenericType: {fileID: 0}
-      - languageType: 9
-        languageGenericType: {fileID: 0}
-      - languageType: 10
-        languageGenericType: {fileID: 0}
-      - languageType: 11
-        languageGenericType: {fileID: 0}
-      dialogueNodePortList:
-      - portGuid: dcd46972-2895-4f83-b89e-c10d3d3ca0a4
-        inputGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
-        outputGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
-        textLanguageList:
-        - languageType: 0
-          languageGenericType: Yes
-        - languageType: 1
-          languageGenericType: Choice 1
-        - languageType: 2
-          languageGenericType: Choice 1
-        - languageType: 3
-          languageGenericType: Choice 1
-        - languageType: 4
-          languageGenericType: Choice 1
-        - languageType: 5
-          languageGenericType: Choice 1
-        - languageType: 6
-          languageGenericType: Choice 1
-        - languageType: 7
-          languageGenericType: Choice 1
-        - languageType: 8
-          languageGenericType: Choice 1
-        - languageType: 9
-          languageGenericType: Choice 1
-        - languageType: 10
-          languageGenericType: Choice 1
-        - languageType: 11
-          languageGenericType: Choice 1
-      - portGuid: e409d5f1-83ac-4d84-8b22-12cad2c0df81
-        inputGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
-        outputGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
-        textLanguageList:
-        - languageType: 0
-          languageGenericType: No
-        - languageType: 1
-          languageGenericType: Choice 2
-        - languageType: 2
-          languageGenericType: Choice 2
-        - languageType: 3
-          languageGenericType: Choice 2
-        - languageType: 4
-          languageGenericType: Choice 2
-        - languageType: 5
-          languageGenericType: Choice 2
-        - languageType: 6
-          languageGenericType: Choice 2
-        - languageType: 7
-          languageGenericType: Choice 2
-        - languageType: 8
-          languageGenericType: Choice 2
-        - languageType: 9
-          languageGenericType: Choice 2
-        - languageType: 10
-          languageGenericType: Choice 2
-        - languageType: 11
-          languageGenericType: Choice 2
+          languageGenericType: 
   - nodeGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
     position: {x: 1486.4, y: -334.4}
     dialogueInfo:
       characterName: Male
       characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
+      potraitFacingDirection: 0
+      textLanguageList:
       - languageType: 0
         languageGenericType: Yes, it is really fun!
       - languageType: 1
@@ -408,7 +154,7 @@ MonoBehaviour:
       - languageType: 5
         languageGenericType: 
       - languageType: 6
-        languageGenericType: 
+        languageGenericType: WER
       - languageType: 7
         languageGenericType: 
       - languageType: 8
@@ -419,7 +165,7 @@ MonoBehaviour:
         languageGenericType: 
       - languageType: 11
         languageGenericType: 
-      audioClipList:
+      audioClipLanguageList:
       - languageType: 0
         languageGenericType: {fileID: 0}
       - languageType: 1
@@ -454,32 +200,32 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 1
         - languageType: 2
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 1
+          languageGenericType: REW
         - languageType: 7
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 1
+          languageGenericType: 
   - nodeGuid: fe0d4fbe-2db3-47c7-9749-b7cb8a5acb8f
     position: {x: 1004.8, y: -174.40001}
     dialogueInfo:
       characterName: Male
       characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
+      potraitFacingDirection: 0
+      textLanguageList:
       - languageType: 0
         languageGenericType: I am supposed to be the player
       - languageType: 1
@@ -493,7 +239,7 @@ MonoBehaviour:
       - languageType: 5
         languageGenericType: 
       - languageType: 6
-        languageGenericType: 
+        languageGenericType: EWR
       - languageType: 7
         languageGenericType: 
       - languageType: 8
@@ -504,7 +250,7 @@ MonoBehaviour:
         languageGenericType: 
       - languageType: 11
         languageGenericType: 
-      audioClipList:
+      audioClipLanguageList:
       - languageType: 0
         languageGenericType: {fileID: 0}
       - languageType: 1
@@ -539,32 +285,32 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 1
         - languageType: 2
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 1
+          languageGenericType: WER
         - languageType: 7
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 1
+          languageGenericType: 
   - nodeGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
     position: {x: 1484, y: -60.8}
     dialogueInfo:
       characterName: Male
       characterPotrait: {fileID: 0}
-      potraitFaceImageDirection: 0
-      textList:
+      potraitFacingDirection: 0
+      textLanguageList:
       - languageType: 0
         languageGenericType: No, not really...
       - languageType: 1
@@ -578,7 +324,7 @@ MonoBehaviour:
       - languageType: 5
         languageGenericType: 
       - languageType: 6
-        languageGenericType: 
+        languageGenericType: REW
       - languageType: 7
         languageGenericType: 
       - languageType: 8
@@ -589,7 +335,7 @@ MonoBehaviour:
         languageGenericType: 
       - languageType: 11
         languageGenericType: 
-      audioClipList:
+      audioClipLanguageList:
       - languageType: 0
         languageGenericType: {fileID: 0}
       - languageType: 1
@@ -624,34 +370,34 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 1
         - languageType: 2
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 1
+          languageGenericType: EWR
         - languageType: 7
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 1
-  - nodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
-    position: {x: 475.2, y: 141.59999}
+          languageGenericType: 
+  - nodeGuid: e3ec248a-ead0-468c-aa73-f524c1c13e46
+    position: {x: 469.6, y: -210.40001}
     dialogueInfo:
-      characterName: Miss Z
-      characterPotrait: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-      potraitFaceImageDirection: 0
-      textList:
+      characterName: Mr.A
+      characterPotrait: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+      potraitFacingDirection: 0
+      textLanguageList:
       - languageType: 0
-        languageGenericType: Yes?
+        languageGenericType: 
       - languageType: 1
         languageGenericType: 
       - languageType: 2
@@ -674,7 +420,318 @@ MonoBehaviour:
         languageGenericType: 
       - languageType: 11
         languageGenericType: 
-      audioClipList:
+      audioClipLanguageList:
+      - languageType: 0
+        languageGenericType: {fileID: 0}
+      - languageType: 1
+        languageGenericType: {fileID: 0}
+      - languageType: 2
+        languageGenericType: {fileID: 0}
+      - languageType: 3
+        languageGenericType: {fileID: 0}
+      - languageType: 4
+        languageGenericType: {fileID: 0}
+      - languageType: 5
+        languageGenericType: {fileID: 0}
+      - languageType: 6
+        languageGenericType: {fileID: 0}
+      - languageType: 7
+        languageGenericType: {fileID: 0}
+      - languageType: 8
+        languageGenericType: {fileID: 0}
+      - languageType: 9
+        languageGenericType: {fileID: 0}
+      - languageType: 10
+        languageGenericType: {fileID: 0}
+      - languageType: 11
+        languageGenericType: {fileID: 0}
+      dialogueNodePortList: []
+  - nodeGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
+    position: {x: 807.2, y: 220.8}
+    dialogueInfo:
+      characterName: Female
+      characterPotrait: {fileID: 0}
+      potraitFacingDirection: 0
+      textLanguageList:
+      - languageType: 0
+        languageGenericType: What do you want to color?
+      - languageType: 1
+        languageGenericType: 
+      - languageType: 2
+        languageGenericType: 
+      - languageType: 3
+        languageGenericType: 
+      - languageType: 4
+        languageGenericType: 
+      - languageType: 5
+        languageGenericType: 
+      - languageType: 6
+        languageGenericType: WER
+      - languageType: 7
+        languageGenericType: 
+      - languageType: 8
+        languageGenericType: 
+      - languageType: 9
+        languageGenericType: 
+      - languageType: 10
+        languageGenericType: 
+      - languageType: 11
+        languageGenericType: Test this out
+      audioClipLanguageList:
+      - languageType: 0
+        languageGenericType: {fileID: 0}
+      - languageType: 1
+        languageGenericType: {fileID: 0}
+      - languageType: 2
+        languageGenericType: {fileID: 0}
+      - languageType: 3
+        languageGenericType: {fileID: 0}
+      - languageType: 4
+        languageGenericType: {fileID: 0}
+      - languageType: 5
+        languageGenericType: {fileID: 0}
+      - languageType: 6
+        languageGenericType: {fileID: 0}
+      - languageType: 7
+        languageGenericType: {fileID: 0}
+      - languageType: 8
+        languageGenericType: {fileID: 0}
+      - languageType: 9
+        languageGenericType: {fileID: 0}
+      - languageType: 10
+        languageGenericType: {fileID: 0}
+      - languageType: 11
+        languageGenericType: {fileID: 0}
+      dialogueNodePortList:
+      - portGuid: 29170c6a-0148-4f41-9335-9f483ef33820
+        inputGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
+        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
+        textLanguageList:
+        - languageType: 0
+          languageGenericType: Color player
+        - languageType: 1
+          languageGenericType: Choice 1
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: REW
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: cho1
+      - portGuid: c1112a94-bc18-490b-a588-bdbc94fd8918
+        inputGuid: 44e3a31a-8d10-41d7-841a-a82440682794
+        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
+        textLanguageList:
+        - languageType: 0
+          languageGenericType: Color NPC
+        - languageType: 1
+          languageGenericType: Choice 2
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: EWR
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: cho2
+      - portGuid: 3691b993-5322-43aa-85a8-c5a01204e2fd
+        inputGuid: 234bfd89-0af9-4e20-a0d0-c040255213ec
+        outputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
+        textLanguageList:
+        - languageType: 0
+          languageGenericType: Go back
+        - languageType: 1
+          languageGenericType: Choice 3
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: WER
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: cho3
+  - nodeGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
+    position: {x: 1244.8, y: -169.6}
+    dialogueInfo:
+      characterName: Female
+      characterPotrait: {fileID: 0}
+      potraitFacingDirection: 0
+      textLanguageList:
+      - languageType: 0
+        languageGenericType: Is it any fun to be the player?
+      - languageType: 1
+        languageGenericType: 
+      - languageType: 2
+        languageGenericType: 
+      - languageType: 3
+        languageGenericType: 
+      - languageType: 4
+        languageGenericType: 
+      - languageType: 5
+        languageGenericType: 
+      - languageType: 6
+        languageGenericType: WER
+      - languageType: 7
+        languageGenericType: 
+      - languageType: 8
+        languageGenericType: 
+      - languageType: 9
+        languageGenericType: 
+      - languageType: 10
+        languageGenericType: 
+      - languageType: 11
+        languageGenericType: 
+      audioClipLanguageList:
+      - languageType: 0
+        languageGenericType: {fileID: 0}
+      - languageType: 1
+        languageGenericType: {fileID: 0}
+      - languageType: 2
+        languageGenericType: {fileID: 0}
+      - languageType: 3
+        languageGenericType: {fileID: 0}
+      - languageType: 4
+        languageGenericType: {fileID: 0}
+      - languageType: 5
+        languageGenericType: {fileID: 0}
+      - languageType: 6
+        languageGenericType: {fileID: 0}
+      - languageType: 7
+        languageGenericType: {fileID: 0}
+      - languageType: 8
+        languageGenericType: {fileID: 0}
+      - languageType: 9
+        languageGenericType: {fileID: 0}
+      - languageType: 10
+        languageGenericType: {fileID: 0}
+      - languageType: 11
+        languageGenericType: {fileID: 0}
+      dialogueNodePortList:
+      - portGuid: dcd46972-2895-4f83-b89e-c10d3d3ca0a4
+        inputGuid: f3398d83-6296-4bdb-b7ef-d4aca5c410c9
+        outputGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
+        textLanguageList:
+        - languageType: 0
+          languageGenericType: Yes
+        - languageType: 1
+          languageGenericType: Choice 1
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: REW
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: 
+      - portGuid: e409d5f1-83ac-4d84-8b22-12cad2c0df81
+        inputGuid: ac8fdffd-c27a-46b1-82dd-d11a885c51f6
+        outputGuid: 3002bf2b-6935-453d-9fc9-663fb6cc9f34
+        textLanguageList:
+        - languageType: 0
+          languageGenericType: No
+        - languageType: 1
+          languageGenericType: Choice 2
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: EWR
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: 
+  - nodeGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
+    position: {x: 475.2, y: 184}
+    dialogueInfo:
+      characterName: Miss Z
+      characterPotrait: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      potraitFacingDirection: 0
+      textLanguageList:
+      - languageType: 0
+        languageGenericType: Yes?
+      - languageType: 1
+        languageGenericType: 
+      - languageType: 2
+        languageGenericType: 
+      - languageType: 3
+        languageGenericType: 
+      - languageType: 4
+        languageGenericType: 
+      - languageType: 5
+        languageGenericType: 
+      - languageType: 6
+        languageGenericType: WER
+      - languageType: 7
+        languageGenericType: 
+      - languageType: 8
+        languageGenericType: 
+      - languageType: 9
+        languageGenericType: 
+      - languageType: 10
+        languageGenericType: 
+      - languageType: 11
+        languageGenericType: 
+      audioClipLanguageList:
       - languageType: 0
         languageGenericType: {fileID: 0}
       - languageType: 1
@@ -709,25 +766,25 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 1
         - languageType: 2
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 1
+          languageGenericType: REW
         - languageType: 7
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 1
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 1
+          languageGenericType: 
       - portGuid: d0799bc5-fd67-429c-90e8-dad51179d3c9
         inputGuid: 9109f612-9f79-47aa-b5b1-8ca352480ee9
         outputGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
@@ -737,25 +794,25 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 2
         - languageType: 2
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 2
+          languageGenericType: EWR
         - languageType: 7
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 2
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 2
+          languageGenericType: 
       - portGuid: 30d4d5af-39ca-4b57-bd04-75002e73ef82
         inputGuid: fa3260ae-5d4b-427d-8cdc-72be08b70b9e
         outputGuid: f2e93305-bb8d-4126-827e-6ef1f908701c
@@ -765,42 +822,48 @@ MonoBehaviour:
         - languageType: 1
           languageGenericType: Choice 3
         - languageType: 2
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 3
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 4
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 5
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 6
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 7
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 8
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 9
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 10
-          languageGenericType: Choice 3
+          languageGenericType: 
         - languageType: 11
-          languageGenericType: Choice 3
+          languageGenericType: 
   eventNodeDataList:
-  - nodeGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
-    position: {x: 1041.6, y: 153.59999}
-    dialogueEventSO: {fileID: 11400000, guid: 016800c7c6790dd42a232953aec514e9, type: 2}
   - nodeGuid: 44e3a31a-8d10-41d7-841a-a82440682794
-    position: {x: 1046.4, y: 283.2}
-    dialogueEventSO: {fileID: 11400000, guid: 016800c7c6790dd42a232953aec514e9, type: 2}
+    position: {x: 1088.8, y: 394.40002}
+    eventStringIDDataList: []
+    eventScriptableObjectDataList: []
+  - nodeGuid: c9652c82-8e6d-4ce4-bd2e-c84379bd7ee4
+    position: {x: 1088, y: 206.4}
+    eventStringIDDataList:
+    - stringEvent: 12312
+      idNumber: 0
+    eventScriptableObjectDataList:
+    - dialogueEventSO: {fileID: 11400000, guid: 016800c7c6790dd42a232953aec514e9, type: 2}
+    - dialogueEventSO: {fileID: 11400000, guid: 016800c7c6790dd42a232953aec514e9, type: 2}
   endNodeDataList:
-  - nodeGuid: fa3260ae-5d4b-427d-8cdc-72be08b70b9e
-    position: {x: 765.6, y: 456.80002}
-    endNodeType: 0
   - nodeGuid: d8a77e74-13b1-4b1e-843e-cb13bcaa8bd5
     position: {x: 1785.6, y: -157.6}
     endNodeType: 3
   - nodeGuid: 234bfd89-0af9-4e20-a0d0-c040255213ec
-    position: {x: 1038.4, y: 396}
+    position: {x: 1080.8, y: 507.2}
     endNodeType: 2
   - nodeGuid: 0d0a86ad-d119-4fc7-b1f1-f0159389075e
-    position: {x: 1362.4, y: 260}
+    position: {x: 1404.8, y: 371.2}
     endNodeType: 1
+  - nodeGuid: fa3260ae-5d4b-427d-8cdc-72be08b70b9e
+    position: {x: 813.6, y: 677.60004}
+    endNodeType: 0
