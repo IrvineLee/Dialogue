@@ -1,53 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-using DialogueEditor.Runtime.Enums.Nodes;
 using DialogueEditor.Editor.GraphView;
+using DialogueEditor.Runtime.Classes.Data;
 
 namespace DialogueEditor.Editor.Nodes
 {
 	public class EndNode : BaseNode
 	{
-		EndNodeType endNodeType = EndNodeType.End;
-		EnumField enumField;
+		[SerializeField] EndNodeData endNodeData = new EndNodeData();
 
-		public EndNodeType EndNodeType { get => endNodeType; }
+		string nodeStyleSheet = "USS/Nodes/EndNodeStyleSheet";
+
+		public EndNodeData EndNodeData { get => endNodeData; }
 
 		public EndNode() { }
 
 		public EndNode(Vector2 position, DialogueEditorWindow editorWindow, DialogueGraphView graphView)
 		{
-			this.editorWindow = editorWindow;
-			this.graphView = graphView;
-
-			title = "End";
-			SetPosition(new Rect(position, defaultNodeSide));
-			nodeGuid = Guid.NewGuid().ToString();
+			StyleSheet styleSheet = Resources.Load<StyleSheet>(nodeStyleSheet);
+			Initialize(position, editorWindow, graphView, "End", styleSheet);
 
 			AddInputPort("Input");
 
-			enumField = new EnumField() { value = endNodeType };
-			enumField.Init(endNodeType);
-			enumField.RegisterValueChangedCallback((value) => endNodeType = (EndNodeType)value.newValue);
-			enumField.SetValueWithoutNotify(endNodeType);
-
+			EnumField enumField = GetNewEnumField_Generic(endNodeData.EndNodeType);
 			mainContainer.Add(enumField);
-		}
-
-		public void SetEndNodeType(EndNodeType endNodeType) 
-		{ 
-			this.endNodeType = endNodeType;
-			LoadValueIntoField();
 		}
 
 		public override void LoadValueIntoField()
 		{
-			base.LoadValueIntoField();
-			enumField.SetValueWithoutNotify(endNodeType);
+			if (EndNodeData.EndNodeType.EnumField != null)
+				EndNodeData.EndNodeType.EnumField.SetValueWithoutNotify(endNodeData.EndNodeType.Value);
 		}
 	}
 }

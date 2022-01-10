@@ -23,41 +23,41 @@ namespace DialogueEditor.Editor.CSVTools
 
 		public void Save()
 		{
-			List<DialogueContainerSO> dialogueContainerList = CSVHelper.FindAllObjectsFromResources<DialogueContainerSO>();
+			//List<DialogueContainerSO> dialogueContainerList = CSVHelper.FindAllObjectsFromResources<DialogueContainerSO>();
 
-			CreateFile();
-			foreach (DialogueContainerSO dialogueContainer in dialogueContainerList)
-			{
-				foreach (DialogueNodeData nodeData in dialogueContainer.DialogueNodeDataList)
-				{
-					List<string> stringList = new List<string>();
-					stringList.Add(nodeData.NodeGuid);
-					stringList.Add(dialogueContainer.name);
+			//CreateFile();
+			//foreach (DialogueContainerSO dialogueContainer in dialogueContainerList)
+			//{
+			//	foreach (DialogueNodeData nodeData in dialogueContainer.DialogueNodeDataList)
+			//	{
+			//		List<string> stringList = new List<string>();
+			//		stringList.Add(nodeData.NodeGuid);
+			//		stringList.Add(dialogueContainer.name);
 
-					foreach (LanguageType languageType in Enum.GetValues(typeof(LanguageType)))
-					{
-						string s = nodeData.DialogueInfo.TextLanguageList.Find(language => language.LanguageType == languageType).LanguageGenericType.Replace("\"", "\"\"");
-						stringList.Add($"\"{s}\"");
-					}
+			//		foreach (LanguageType languageType in Enum.GetValues(typeof(LanguageType)))
+			//		{
+			//			string s = nodeData.DialogueInfo.TextLanguageList.Find(language => language.LanguageType == languageType).LanguageGenericType.Replace("\"", "\"\"");
+			//			stringList.Add($"\"{s}\"");
+			//		}
 
-					AppendToFile(stringList);
+			//		AppendToFile(stringList);
 
-					foreach (DialogueNodePort nodePort in nodeData.DialogueInfo.DialogueNodePortList)
-					{
-						stringList = new List<string>();
-						stringList.Add(nodePort.PortGuid);
-						stringList.Add(dialogueContainer.name);
+			//		foreach (DialogueNodePort nodePort in nodeData.DialogueInfo.DialogueNodePortList)
+			//		{
+			//			stringList = new List<string>();
+			//			stringList.Add(nodePort.PortGuid);
+			//			stringList.Add(dialogueContainer.name);
 
-						foreach (LanguageType languageType in Enum.GetValues(typeof(LanguageType)))
-						{
-							string s = nodePort.TextLanguageList.Find(language => language.LanguageType == languageType).LanguageGenericType.Replace("\"", "\"\"");
-							stringList.Add($"\"{s}\"");
-						}
+			//			foreach (LanguageType languageType in Enum.GetValues(typeof(LanguageType)))
+			//			{
+			//				string s = nodePort.TextLanguageList.Find(language => language.LanguageType == languageType).LanguageGenericType.Replace("\"", "\"\"");
+			//				stringList.Add($"\"{s}\"");
+			//			}
 
-						AppendToFile(stringList);
-					}
-				}
-			}
+			//			AppendToFile(stringList);
+			//		}
+			//	}
+			//}
 		}
 
 		void AppendToFile(List<string> stringList)

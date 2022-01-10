@@ -2,45 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-using DialogueDisplay;
-
 namespace DialogueEditor.Runtime.Classes.Data
 {
 	[Serializable]
 	public class DialogueNodeData : BaseNodeData
 	{
-		[SerializeField] DialogueInfo dialogueInfo = new DialogueInfo();
+		[SerializeField] List<DialogueData_BaseContainer> baseContainerList = new List<DialogueData_BaseContainer>();
+		[SerializeField] List<DialogueData_Name> nameList = new List<DialogueData_Name>();
+		[SerializeField] List<DialogueData_Text> textList = new List<DialogueData_Text>();
+		[SerializeField] List<DialogueData_Images> imagesList = new List<DialogueData_Images>();
+		[SerializeField] List<DialogueData_Port> portList = new List<DialogueData_Port>();
 
-		public DialogueInfo DialogueInfo { get => dialogueInfo; }
-
-		public DialogueNodeData(DialogueInfo dialogueInfo)
-		{
-			this.dialogueInfo = new DialogueInfo(dialogueInfo);
-		}
-
-		public string GetTextLanguageGenericTypeRuntime()
-		{
-			return dialogueInfo.TextLanguageList.Find(text => text.LanguageType == LanguageController.sSingleton.LanguageType).LanguageGenericType;
-		}
-
-		public AudioClip GetAudioLanguageGenericTypeRuntime()
-		{
-			return dialogueInfo.AudioClipList.Find(clip => clip.LanguageType == LanguageController.sSingleton.LanguageType).LanguageGenericType;
-		}
-
-		public void SetTextLanguageGenericType(List<LanguageGeneric<string>> textLanguageList)
-		{
-			dialogueInfo.SetTextList(textLanguageList);
-		}
-
-		public void SetAudioLanguageGenericType(List<LanguageGeneric<AudioClip>> audioClipLanguageList)
-		{
-			dialogueInfo.SetAudioList(audioClipLanguageList);
-		}
-
-		public void UpdateLanguage(List<LanguageGeneric<string>> textLanguageList, List<LanguageGeneric<AudioClip>> audioClipLanguageList)
-		{
-			dialogueInfo.UpdateLanguage(textLanguageList, audioClipLanguageList);
-		}
+		public List<DialogueData_BaseContainer> BaseContainerList { get => baseContainerList; }
+		public List<DialogueData_Name> NameList { get => nameList; }
+		public List<DialogueData_Text> TextList { get => textList; }
+		public List<DialogueData_Images> ImagesList { get => imagesList; }
+		public List<DialogueData_Port> PortList { get => portList; }
 	}
 }

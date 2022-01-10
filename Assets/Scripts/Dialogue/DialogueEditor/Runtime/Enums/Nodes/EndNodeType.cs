@@ -5,7 +5,6 @@ namespace DialogueEditor.Runtime.Enums.Nodes
 	{
 		End = 0,
 		Repeat,
-		GoBack,
 		ReturnToStart,
 	}
 }

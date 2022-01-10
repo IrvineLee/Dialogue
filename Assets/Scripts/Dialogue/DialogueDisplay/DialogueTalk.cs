@@ -24,103 +24,103 @@ namespace DialogueDisplay
 
 		public void StartDialogue()
 		{
-			currentDialogueNodeData = lastDialogueNodeData = null;
+			//currentDialogueNodeData = lastDialogueNodeData = null;
 
-			CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
-			dialogueController.ShowDialogue(true);
+			//CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
+			//dialogueController.ShowDialogue(true);
 		}
 
 		void CheckNodeType(BaseNodeData baseNodeData)
 		{
-			switch (baseNodeData)
-			{
-				case StartNodeData startNodeData:
-					RunNode(startNodeData);
-					break;
-				case DialogueNodeData dialogueNodeData:
-					RunNode(dialogueNodeData);
-					break;
-				case EventNodeData eventNodeData:
-					RunNode(eventNodeData);
-					break;
-				case EndNodeData endNodeData:
-					RunNode(endNodeData);
-					break;
-				default:
-					break;
-			}
+			//switch (baseNodeData)
+			//{
+			//	case StartNodeData startNodeData:
+			//		RunNode(startNodeData);
+			//		break;
+			//	case DialogueNodeData dialogueNodeData:
+			//		RunNode(dialogueNodeData);
+			//		break;
+			//	case EventNodeData eventNodeData:
+			//		RunNode(eventNodeData);
+			//		break;
+			//	case EndNodeData endNodeData:
+			//		RunNode(endNodeData);
+			//		break;
+			//	default:
+			//		break;
+			//}
 		}
 
-		void RunNode(StartNodeData nodeData)
-		{
-			CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
-		}
+		//void RunNode(StartNodeData nodeData)
+		//{
+		//	CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
+		//}
 
-		void RunNode(DialogueNodeData nodeData)
-		{
-			if (currentDialogueNodeData != nodeData)
-			{
-				lastDialogueNodeData = currentDialogueNodeData;
-				currentDialogueNodeData = nodeData;
-			}
+		//void RunNode(DialogueNodeData nodeData)
+		//{
+		//	if (currentDialogueNodeData != nodeData)
+		//	{
+		//		lastDialogueNodeData = currentDialogueNodeData;
+		//		currentDialogueNodeData = nodeData;
+		//	}
 
-			dialogueController.SetText(nodeData.DialogueInfo.CharacterName, nodeData.GetTextLanguageGenericTypeRuntime());
-			dialogueController.SetImage(nodeData.DialogueInfo.CharacterPotrait, nodeData.DialogueInfo.PotraitFacingDirection);
+		//	dialogueController.SetText(nodeData.DialogueInfo.CharacterName, nodeData.GetTextLanguageGenericTypeRuntime());
+		//	dialogueController.SetImage(nodeData.DialogueInfo.CharacterPotrait, nodeData.DialogueInfo.PotraitFacingDirection);
 			
-			MakeButtons(nodeData.DialogueInfo.DialogueNodePortList);
-			audioSource.clip = nodeData.GetAudioLanguageGenericTypeRuntime();
-			audioSource.Play();
-		}
+		//	MakeButtons(nodeData.DialogueInfo.DialogueNodePortList);
+		//	audioSource.clip = nodeData.GetAudioLanguageGenericTypeRuntime();
+		//	audioSource.Play();
+		//}
 
-		void RunNode(EventNodeData nodeData)
-		{
-			foreach (EventScriptableObjectData scriptableObjectData in nodeData.EventScriptableObjectDataList)
-			{
-				if (scriptableObjectData.DialogueEventSO)
-					scriptableObjectData.DialogueEventSO.RunEvent();
-			}
-			CheckNodeType(GetNextNode(nodeData));
-		}
+		//void RunNode(EventNodeData nodeData)
+		//{
+		//	foreach (EventScriptableObjectData scriptableObjectData in nodeData.EventScriptableObjectDataList)
+		//	{
+		//		if (scriptableObjectData.DialogueEventSO)
+		//			scriptableObjectData.DialogueEventSO.RunEvent();
+		//	}
+		//	CheckNodeType(GetNextNode(nodeData));
+		//}
 
-		void RunNode(EndNodeData nodeData)
-		{
-			switch (nodeData.EndNodeType)
-			{
-				case EndNodeType.End:
-					dialogueController.ShowDialogue(false);
-					break;
-				case EndNodeType.Repeat:
-					CheckNodeType(GetNodeByGuid(currentDialogueNodeData.NodeGuid));
-					break;
-				case EndNodeType.GoBack:
-					CheckNodeType(GetNodeByGuid(lastDialogueNodeData.NodeGuid));
-					break;
-				case EndNodeType.ReturnToStart:
-					CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
-					break;
-				default:
-					break;
-			}
-		}
+		//void RunNode(EndNodeData nodeData)
+		//{
+		//	switch (nodeData.EndNodeType)
+		//	{
+		//		case EndNodeType.End:
+		//			dialogueController.ShowDialogue(false);
+		//			break;
+		//		case EndNodeType.Repeat:
+		//			CheckNodeType(GetNodeByGuid(currentDialogueNodeData.NodeGuid));
+		//			break;
+		//		case EndNodeType.GoBack:
+		//			CheckNodeType(GetNodeByGuid(lastDialogueNodeData.NodeGuid));
+		//			break;
+		//		case EndNodeType.ReturnToStart:
+		//			CheckNodeType(GetNextNode(DialogueContainerSO.StartNodeDataList[0]));
+		//			break;
+		//		default:
+		//			break;
+		//	}
+		//}
 
-		void MakeButtons(List<DialogueNodePort> nodePortList)
-		{
-			List<string> textList = new List<string>();
-			List<UnityAction> unityActionList = new List<UnityAction>();
+		//void MakeButtons(List<DialogueNodePort> nodePortList)
+		//{
+		//	List<string> textList = new List<string>();
+		//	List<UnityAction> unityActionList = new List<UnityAction>();
 
-			foreach (DialogueNodePort nodePort in nodePortList)
-			{
-				textList.Add(nodePort.GetTextLanguageGenericTypeRuntime());
-				UnityAction unityAction = null;
-				unityAction += () => 
-				{
-					CheckNodeType(GetNodeByGuid(nodePort.InputGuid));
-					audioSource.Stop();
-				};
-				unityActionList.Add(unityAction);
-			}
+		//	foreach (DialogueNodePort nodePort in nodePortList)
+		//	{
+		//		textList.Add(nodePort.GetTextLanguageGenericTypeRuntime());
+		//		UnityAction unityAction = null;
+		//		unityAction += () => 
+		//		{
+		//			CheckNodeType(GetNodeByGuid(nodePort.InputGuid));
+		//			audioSource.Stop();
+		//		};
+		//		unityActionList.Add(unityAction);
+		//	}
 
-			dialogueController.SetButtons(textList, unityActionList);
-		}
+		//	dialogueController.SetButtons(textList, unityActionList);
+		//}
 	}
 }

@@ -55,7 +55,7 @@ namespace DialogueEditor.Editor.SaveLoad
 				BaseNode outputNode = (BaseNode)edge.output.node;
 				BaseNode inputNode = (BaseNode)edge.input.node;
 
-				dialogueContainerSO.NodeLinkDataList.Add(new NodeLinkData(outputNode.NodeGuid, inputNode.NodeGuid));
+				dialogueContainerSO.NodeLinkDataList.Add(new NodeLinkData(outputNode.NodeGuid, edge.output.portName, inputNode.NodeGuid, edge.input.portName));
 			}
 		}
 
@@ -63,6 +63,7 @@ namespace DialogueEditor.Editor.SaveLoad
 		{
 			dialogueContainerSO.StartNodeDataList.Clear();
 			dialogueContainerSO.DialogueNodeDataList.Clear();
+			dialogueContainerSO.BranchNodeDataList.Clear();
 			dialogueContainerSO.EventNodeDataList.Clear();
 			dialogueContainerSO.EndNodeDataList.Clear();
 
@@ -76,6 +77,9 @@ namespace DialogueEditor.Editor.SaveLoad
 					case DialogueNode dialogueNode:
 						dialogueContainerSO.DialogueNodeDataList.Add(SaveNodeData(dialogueNode));
 						break;
+					case BranchNode branchNode:
+						dialogueContainerSO.BranchNodeDataList.Add(SaveNodeData(branchNode));
+						break;
 					case EventNode eventNode:
 						dialogueContainerSO.EventNodeDataList.Add(SaveNodeData(eventNode));
 						break;
@@ -88,30 +92,6 @@ namespace DialogueEditor.Editor.SaveLoad
 			}
 		}
 
-		DialogueNodeData SaveNodeData(DialogueNode node)
-		{
-			DialogueNodeData dialogueNodeData = new DialogueNodeData(node.DialogueInfo);
-			dialogueNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
-
-			foreach (DialogueNodePort nodePort in dialogueNodeData.DialogueInfo.DialogueNodePortList)
-			{
-				nodePort.SetGuid(string.Empty, string.Empty);
-
-				foreach (Edge edge in edgeList)
-				{
-					if (edge.output.portName == nodePort.PortGuid)
-					{
-						string inputGuid = ((BaseNode)edge.input.node).NodeGuid;
-						string outputGuid = ((BaseNode)edge.output.node).NodeGuid;
-
-						nodePort.SetGuid(inputGuid, outputGuid);
-					}
-				}
-			}
-
-			return dialogueNodeData;
-		}
-
 		StartNodeData SaveNodeData(StartNode node)
 		{
 			StartNodeData startNodeData = new StartNodeData();
@@ -120,20 +100,62 @@ namespace DialogueEditor.Editor.SaveLoad
 			return startNodeData;
 		}
 
+		DialogueNodeData SaveNodeData(DialogueNode node)
+		{
+			//DialogueNodeData dialogueNodeData = new DialogueNodeData(node.DialogueInfo);
+			//dialogueNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
+
+			//foreach (DialogueNodePort nodePort in dialogueNodeData.DialogueInfo.DialogueNodePortList)
+			//{
+			//	nodePort.SetGuid(string.Empty, string.Empty);
+
+			//	foreach (Edge edge in edgeList)
+			//	{
+			//		if (edge.output.portName == nodePort.PortGuid)
+			//		{
+			//			string inputGuid = ((BaseNode)edge.input.node).NodeGuid;
+			//			string outputGuid = ((BaseNode)edge.output.node).NodeGuid;
+
+			//			nodePort.SetGuid(inputGuid, outputGuid);
+			//		}
+			//	}
+			//}
+
+			//return dialogueNodeData;
+			return null;
+		}
+
+		BranchNodeData SaveNodeData(BranchNode node)
+		{
+			Edge trueOutput = edgeList.FirstOrDefault(line => line.output.node == node && string.Equals(line.output.portName, "True"));
+			Edge falseOutput = edgeList.FirstOrDefault(line => line.output.node == node && string.Equals(line.output.portName, "False"));
+
+			string trueGuid = trueOutput != null ? (trueOutput.input.node as BaseNode).NodeGuid : string.Empty;
+			string falseGuid = falseOutput != null ? (falseOutput.input.node as BaseNode).NodeGuid : string.Empty;
+
+			//BranchNodeData branchNodeData = new BranchNodeData(trueGuid, falseGuid, node.BranchStringIDDataList);
+			//branchNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
+
+			//return branchNodeData;
+			return null;
+		}
+
 		EventNodeData SaveNodeData(EventNode node)
 		{
-			EventNodeData eventNodeData = new EventNodeData(node.EventStringIDDataList, node.EventScriptableObjectDataList);
-			eventNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
+			//EventNodeData eventNodeData = new EventNodeData(node.EventStringIDDataList, node.EventScriptableObjectDataList);
+			//eventNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
 
-			return eventNodeData;
+			//return eventNodeData;
+			return null;
 		}
 
 		EndNodeData SaveNodeData(EndNode node)
 		{
-			EndNodeData endNodeData = new EndNodeData(node.EndNodeType);
-			endNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
+			//EndNodeData endNodeData = new EndNodeData(node.EndNodeType);
+			//endNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
 
-			return endNodeData;
+			//return endNodeData;
+			return null;
 		}
 
 		#endregion
@@ -168,20 +190,29 @@ namespace DialogueEditor.Editor.SaveLoad
 				graphView.AddElement(dialogueNode);
 			}
 
+			foreach (BranchNodeData node in dialogueContainerSO.BranchNodeDataList)
+			{
+				BranchNode branchNode = graphView.CreateBranchNode(node.Position);
+				branchNode.SetNodeGuid(node.NodeGuid);
+				//branchNode.LoadBranchNode(node);
+
+				graphView.AddElement(branchNode);
+			}
+
 			foreach (EventNodeData node in dialogueContainerSO.EventNodeDataList)
 			{
 				EventNode eventNode = graphView.CreateEventNode(node.Position);
 				eventNode.SetNodeGuid(node.NodeGuid);
 
-				foreach (EventStringIDData eventStringIDData in node.EventStringIDDataList)
-				{
-					eventNode.AddStringEvent(eventStringIDData);
-				}
+				//foreach (EventStringIDData eventStringIDData in node.EventStringIDDataList)
+				//{
+				//	eventNode.AddStringEvent(eventStringIDData);
+				//}
 
-				foreach (EventScriptableObjectData eventScriptableObjectData in node.EventScriptableObjectDataList)
-				{
-					eventNode.AddScriptableEvent(eventScriptableObjectData);
-				}
+				//foreach (EventScriptableObjectData eventScriptableObjectData in node.EventScriptableObjectDataList)
+				//{
+				//	eventNode.AddScriptableEvent(eventScriptableObjectData);
+				//}
 
 				graphView.AddElement(eventNode);
 			}
@@ -190,7 +221,7 @@ namespace DialogueEditor.Editor.SaveLoad
 			{
 				EndNode endNode = graphView.CreateEndNode(node.Position);
 				endNode.SetNodeGuid(node.NodeGuid);
-				endNode.SetEndNodeType(node.EndNodeType);
+				//endNode.SetEndNodeType(node.EndNodeType);
 
 				graphView.AddElement(endNode);
 			}
@@ -203,43 +234,24 @@ namespace DialogueEditor.Editor.SaveLoad
 			{
 				List<NodeLinkData> connectionList = dialogueContainerSO.NodeLinkDataList.Where(edge => edge.BaseNodeGuid == baseNode.NodeGuid).ToList();
 
+				List<Port> allOutputPort = baseNode.outputContainer.Children().Where(child => child is Port).Cast<Port>().ToList();
+
 				foreach (NodeLinkData nodeLinkData in connectionList)
 				{
 					string targetNodeGuid = nodeLinkData.TargetNodeGuid;
 					BaseNode targetNode = nodeList.First(node => node.NodeGuid == targetNodeGuid);
 
-					if (!(baseNode is DialogueNode))
+					if (targetNode == null)
+						continue;
+
+					foreach (Port port in allOutputPort)
 					{
-						int index = connectionList.IndexOf(nodeLinkData);
-						LinkNodesTogether((Port)targetNode.inputContainer[0], baseNode.outputContainer[index].Q<Port>());
-					}
-				}
-			}
-
-			// Make connection for dialogue nodes.
-			List<DialogueNode> dialogueNodeList = nodeList.FindAll(node => node is DialogueNode).Cast<DialogueNode>().ToList();
-			foreach (DialogueNode dialogueNode in dialogueNodeList)
-			{
-				foreach (DialogueNodePort nodePort in dialogueNode.DialogueInfo.DialogueNodePortList)
-				{
-					if (nodePort.InputGuid == string.Empty) continue;
-
-					BaseNode targetNode = nodeList.First(node => node.NodeGuid == nodePort.InputGuid);
-
-					Port myPort = null;
-
-					// Check all ports in nodes outpout container.
-					for (int i = 0; i < dialogueNode.outputContainer.childCount; i++)
-					{
-						// Find port with same ID, we use portName as ID
-						if (dialogueNode.outputContainer[i].Q<Port>().portName == nodePort.PortGuid)
+						if (port.portName == nodeLinkData.BasePortName)
 						{
-							myPort = dialogueNode.outputContainer[i].Q<Port>();
+							int index = connectionList.IndexOf(nodeLinkData);
+							LinkNodesTogether((Port)targetNode.inputContainer[0], port);
 						}
 					}
-
-					// Make connection between the ports.
-					LinkNodesTogether((Port)targetNode.inputContainer[0], myPort);
 				}
 			}
 		}

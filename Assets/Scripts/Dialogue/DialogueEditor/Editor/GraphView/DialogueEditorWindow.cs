@@ -14,15 +14,15 @@ namespace DialogueEditor.Editor.GraphView
 {
 	public class DialogueEditorWindow : EditorWindow
 	{
-		DialogueContainerSO currentDialogueContainer;			// Current open dialogue container in dialogue editor window.
-		DialogueGraphView graphView;							// Reference to GraphView Class.
-		DialogueSaveAndLoad saveAndLoad;						// Reference to SaveAndLoad Class.
+		DialogueContainerSO currentDialogueContainer;								// Current open dialogue container in dialogue editor window.
+		DialogueGraphView graphView;												// Reference to GraphView Class.
+		DialogueSaveAndLoad saveAndLoad;											// Reference to SaveAndLoad Class.
 
-		ToolbarMenu languageDropDownMenu;						// Language toolbar menu in the toop of the dialogue editor window.
-		Label nameOfDialogueContainer;							// Name of the current open dialogue container.
-		string graphViewStyleSheet = "GraphViewStyleSheet";		// Name of the graph view style sheet.
+		ToolbarMenu languageDropDownMenu;											// Language toolbar menu in the toop of the dialogue editor window.
+		Label nameOfDialogueContainer;												// Name of the current open dialogue container.
+		string graphViewStyleSheet = "USS/EditorWindow/EditorWindowStyleSheet";		// Name of the graph view style sheet.
 
-		LanguageType selectedLanguage = LanguageType.English;   // Current selected language in the dialogue editor window.
+		LanguageType selectedLanguage = LanguageType.English;						// Current selected language in the dialogue editor window.
 
 		public LanguageType SelectedLanguage { get => selectedLanguage; }
 

@@ -12,7 +12,7 @@ namespace DialogueEditor.Editor.GraphView
 {
 	public class DialogueGraphView : UnityEditor.Experimental.GraphView.GraphView
 	{
-		string graphViewStyleSheet = "GraphViewStyleSheet";			// Name of the graph view style sheet.
+		string graphViewStyleSheet = "USS/GraphView/GraphViewStyleSheet";	// Name of the graph view style sheet.
 		DialogueEditorWindow editorWindow;
 		NodeSearchWindow searchWindow;
 
@@ -78,9 +78,19 @@ namespace DialogueEditor.Editor.GraphView
 			return new StartNode(position, editorWindow, this);
 		}
 
-		public EndNode CreateEndNode(Vector2 position)
+		public DialogueNode CreateDialogueNode(Vector2 position)
 		{
-			return new EndNode(position, editorWindow, this);
+			return new DialogueNode(position, editorWindow, this);
+		}
+
+		public BranchNode CreateBranchNode(Vector2 position)
+		{
+			return new BranchNode(position, editorWindow, this);
+		}
+
+		public ChoiceNode CreateChoiceNode(Vector2 position)
+		{
+			return new ChoiceNode(position, editorWindow, this);
 		}
 
 		public EventNode CreateEventNode(Vector2 position)
@@ -88,9 +98,9 @@ namespace DialogueEditor.Editor.GraphView
 			return new EventNode(position, editorWindow, this);
 		}
 
-		public DialogueNode CreateDialogueNode(Vector2 position)
+		public EndNode CreateEndNode(Vector2 position)
 		{
-			return new DialogueNode(position, editorWindow, this);
+			return new EndNode(position, editorWindow, this);
 		}
 
 		void AddSearchWindow()

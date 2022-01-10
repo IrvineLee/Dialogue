@@ -14,20 +14,20 @@ namespace DialogueDisplay
 
 		public DialogueContainerSO DialogueContainerSO { get => dialogueContainerSO; }
 
-		protected BaseNodeData GetNodeByGuid(string targetNodeGuid)
-		{
-			return dialogueContainerSO.AllNodes.Find(node => node.NodeGuid == targetNodeGuid);
-		}
+		//protected BaseNodeData GetNodeByGuid(string targetNodeGuid)
+		//{
+		//	return dialogueContainerSO.AllNodes.Find(node => node.NodeGuid == targetNodeGuid);
+		//}
 
-		protected BaseNodeData GetNodeByNodePort(DialogueNodePort nodePort)
-		{
-			return dialogueContainerSO.AllNodes.Find(node => node.NodeGuid == nodePort.InputGuid);
-		}
+		//protected BaseNodeData GetNodeByNodePort(DialogueNodePort nodePort)
+		//{
+		//	return dialogueContainerSO.AllNodes.Find(node => node.NodeGuid == nodePort.InputGuid);
+		//}
 
-		protected BaseNodeData GetNextNode(BaseNodeData baseNodeData)
-		{
-			NodeLinkData nodeLinkData = dialogueContainerSO.NodeLinkDataList.Find(edge => edge.BaseNodeGuid == baseNodeData.NodeGuid);
-			return GetNodeByGuid(nodeLinkData.TargetNodeGuid);
-		}
+		//protected BaseNodeData GetNextNode(BaseNodeData baseNodeData)
+		//{
+		//	NodeLinkData nodeLinkData = dialogueContainerSO.NodeLinkDataList.Find(edge => edge.BaseNodeGuid == baseNodeData.NodeGuid);
+		//	return GetNodeByGuid(nodeLinkData.TargetNodeGuid);
+		//}
 	}
 }

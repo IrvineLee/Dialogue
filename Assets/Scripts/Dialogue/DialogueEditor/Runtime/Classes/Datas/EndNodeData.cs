@@ -8,13 +8,15 @@ namespace DialogueEditor.Runtime.Classes.Data
 	[Serializable]
 	public class EndNodeData : BaseNodeData
 	{
-		[SerializeField] EndNodeType endNodeType;
+		[SerializeField] EnumContainer<EndNodeType> endNodeType = new EnumContainer<EndNodeType>();
 
-		public EndNodeType EndNodeType { get => endNodeType; }
+		public EnumContainer<EndNodeType> EndNodeType { get => endNodeType; }
+
+		public EndNodeData() { }
 
 		public EndNodeData(EndNodeType endNodeType)
 		{
-			this.endNodeType = endNodeType;
+			this.endNodeType = new EnumContainer<EndNodeType>(endNodeType);
 		}
 	}
 }

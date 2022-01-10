@@ -34,10 +34,12 @@ namespace DialogueEditor.Editor.GraphView
 				new SearchTreeGroupEntry(new GUIContent("Dialogue Editor"), 0),
 				new SearchTreeGroupEntry(new GUIContent("Dialogue Node"), 1),
 
-				AddNodeSearch("Start Node", new StartNode()),
-				AddNodeSearch("Dialogue Node", new DialogueNode()),
-				AddNodeSearch("Event Node", new EventNode()),
-				AddNodeSearch("End Node", new EndNode()),
+				AddNodeSearch("Start", new StartNode()),
+				AddNodeSearch("Dialogue", new DialogueNode()),
+				AddNodeSearch("Branch", new BranchNode()),
+				AddNodeSearch("Choice", new ChoiceNode()),
+				AddNodeSearch("Event", new EventNode()),
+				AddNodeSearch("End", new EndNode()),
 			};
 			return searchTreeEntryList;
 		}
@@ -73,6 +75,12 @@ namespace DialogueEditor.Editor.GraphView
 					return true;
 				case DialogueNode node:
 					graphView.AddElement(graphView.CreateDialogueNode(position));
+					return true;
+				case BranchNode node:
+					graphView.AddElement(graphView.CreateBranchNode(position));
+					return true;
+				case ChoiceNode node:
+					graphView.AddElement(graphView.CreateChoiceNode(position));
 					return true;
 				case EventNode node:
 					graphView.AddElement(graphView.CreateEventNode(position));
