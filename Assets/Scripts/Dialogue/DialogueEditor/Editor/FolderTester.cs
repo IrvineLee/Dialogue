@@ -1,6 +1,7 @@
  using UnityEngine;
  using UnityEditor;
 using UnityEngine.UIElements;
+using System;
 
 class FolderTester: EditorWindow 
  {
@@ -23,35 +24,12 @@ class FolderTester: EditorWindow
 
 		if (GUILayout.Button("Edit", GUILayout.Width(50)))
 		{
-			ImageSelectedHandlerSprite imageSelectedHandler = (sprite) => 
-            { 
+            Action<Sprite> action = (sprite) => 
+            {
                 this.sprite = sprite;
                 Repaint();
             };
-            EditorUtilities.TexturePickerSprite("Assets/Images/Female", imageSelectedHandler);
+            EditorUtilities.TexturePicker("Assets/Images/Female", action);
         }
-
-        //TexturePickerEditor.Setup("Assets/Images", imageSelectedHandler);
-
-        //sprite = (Sprite)EditorGUILayout.ObjectField(
-        //     "Select Folder",
-        //     targetFolder,
-        //     typeof(Sprite),
-        //     false);
-
-        //if (targetFolder != null) {
-        //     EditorGUILayout.HelpBox(
-        //         "Valid folder! Name: " + targetFolder.name, 
-        //         MessageType.Info, 
-        //         true);
-        // }
-        // else
-        // {
-        //     EditorGUILayout.HelpBox(
-        //         "Not valid!", 
-        //         MessageType.Warning, 
-        //         true);
-        // }
-         
      }
 }
