@@ -16,5 +16,8 @@ namespace DialogueEditor.Runtime.Classes
 		{
 			this.id = new IntContainer(id);
 		}
+
+		public void SetID(int id) { this.id.SetValue(id); }
+		public void SetID(IntContainer id) { this.id = id; }
 	}
 }

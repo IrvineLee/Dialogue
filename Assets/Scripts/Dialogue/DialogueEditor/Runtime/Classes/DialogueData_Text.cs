@@ -13,8 +13,8 @@ namespace DialogueEditor.Runtime.Classes
 	public class DialogueData_Text : DialogueData_BaseContainer
 	{
 #if UNITY_EDITOR
-		[SerializeField] TextField textField = new TextField();
-		[SerializeField] ObjectField objectField = new ObjectField();
+		[SerializeField] TextField textField;
+		[SerializeField] ObjectField objectField;
 #endif
 
 		[SerializeField] StringContainer guidID = new StringContainer();
@@ -35,6 +35,13 @@ namespace DialogueEditor.Runtime.Classes
 		public void SetTextList(List<LanguageGeneric<string>> textList) { this.textList = textList; }
 
 		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipList) { this.audioClipList = audioClipList; }
+		
+		public void SetValues(DialogueData_Text dialogueData_Text) 
+		{
+			SetGuid(dialogueData_Text.guidID);
+			SetTextList(dialogueData_Text.textList);
+			SetAudioList(dialogueData_Text.audioClipList);
+		}
 
 		public void UpdateLanguage(List<LanguageGeneric<string>> textList, List<LanguageGeneric<AudioClip>> audioClipList)
 		{

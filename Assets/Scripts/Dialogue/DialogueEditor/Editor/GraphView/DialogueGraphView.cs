@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,7 +52,8 @@ namespace DialogueEditor.Editor.GraphView
 				// 1st: Cannot connect to itself.
 				// 2nd: Cannot connect to a port on the same node.
 				// 3rd: Input node cannot connect to input node and output node cannot connect to output node.
-				if (startPortView != portView && startPortView.node != portView.node && startPortView.direction != port.direction)
+				if (startPortView != portView && startPortView.node != portView.node && 
+					startPortView.direction != port.direction && startPortView.portColor == port.portColor)
 					compatiblePorts.Add(port);
 			});
 

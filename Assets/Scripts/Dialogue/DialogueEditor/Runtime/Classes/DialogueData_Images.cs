@@ -12,14 +12,14 @@ namespace DialogueEditor.Runtime.Classes
 		public SpriteContainer SpriteLeft { get => spriteLeft; }
 		public SpriteContainer SpriteRight { get => spriteRight; }
 
-		public void SetSpriteLeft(Sprite sprite) { spriteLeft.SetValue(sprite); }
+		public void SetSpriteLeft(SpriteContainer sprite) { spriteLeft.SetValue(sprite.Value); }
 
-		public void SetSpriteRight(Sprite sprite) { spriteRight.SetValue(sprite); }
+		public void SetSpriteRight(SpriteContainer sprite) { spriteRight.SetValue(sprite.Value); }
 
-		public void SetSpriteSprites(Sprite spriteLeft, Sprite spriteRight) 
+		public void SetValues(DialogueData_Images dialogueData_Images)
 		{
-			SetSpriteLeft(spriteLeft);
-			SetSpriteLeft(spriteRight);
+			SetSpriteLeft(dialogueData_Images.spriteLeft);
+			SetSpriteRight(dialogueData_Images.spriteRight);
 		}
 	}
 }

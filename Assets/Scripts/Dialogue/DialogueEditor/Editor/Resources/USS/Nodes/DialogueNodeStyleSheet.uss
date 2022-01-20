@@ -28,7 +28,7 @@
 	color:green;
 }
 .CharacterName{
-	width:260px;
+	width:205px;
 	white-space: normal;
 }
 
@@ -36,6 +36,11 @@
 
 .TextColor{
 	color:red;
+}
+
+/* ----------------- Audio -----------------*/
+.AudioClip{
+	margin-left:90px;
 }
 
 /* ----------------- Images -----------------*/

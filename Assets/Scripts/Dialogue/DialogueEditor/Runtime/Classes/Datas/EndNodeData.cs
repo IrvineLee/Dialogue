@@ -14,9 +14,14 @@ namespace DialogueEditor.Runtime.Classes.Data
 
 		public EndNodeData() { }
 
-		public EndNodeData(EndNodeType endNodeType)
+		public EndNodeData(EnumContainer<EndNodeType> endNodeType)
 		{
-			this.endNodeType = new EnumContainer<EndNodeType>(endNodeType);
+			SetEndNodeData(endNodeType);
+		}
+
+		public void SetEndNodeData(EnumContainer<EndNodeType> endNodeType)
+		{
+			this.endNodeType = endNodeType;
 		}
 	}
 }

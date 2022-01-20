@@ -1,56 +1,69 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using DialogueEditor.Runtime.Enums.Nodes;
 
 namespace DialogueEditor.Runtime.Classes
 {
 	[Serializable]
 	public class DialogueInfo
 	{
-		[SerializeField] string characterName = "";
-		[SerializeField] Sprite characterPotrait;
-		[SerializeField] PotraitFacingDirection potraitFacingDirection;
+		[SerializeField] List<DialogueData_BaseContainer> baseContainerList = new List<DialogueData_BaseContainer>();
+		[SerializeField] List<DialogueData_Name> nameList = new List<DialogueData_Name>();
+		[SerializeField] List<DialogueData_Text> textList = new List<DialogueData_Text>();
+		[SerializeField] List<DialogueData_Images> imagesList = new List<DialogueData_Images>();
 
-		[SerializeField] List<LanguageGeneric<string>> textLanguageList = new List<LanguageGeneric<string>>();
-		[SerializeField] List<LanguageGeneric<AudioClip>> audioClipLanguageList = new List<LanguageGeneric<AudioClip>>();
-		[SerializeField] List<DialogueNodePort> dialogueNodePortList = new List<DialogueNodePort>();
-
-		public string CharacterName { get => characterName; }
-		public Sprite CharacterPotrait { get => characterPotrait; }
-		public PotraitFacingDirection PotraitFacingDirection { get => potraitFacingDirection; }
-
-		public List<LanguageGeneric<string>> TextLanguageList { get => textLanguageList; }
-		public List<LanguageGeneric<AudioClip>> AudioClipList { get => audioClipLanguageList; }
-		public List<DialogueNodePort> DialogueNodePortList { get => dialogueNodePortList; }
-
-		public void SetCharacterName(string characterName) { this.characterName = characterName; }
-		public void SetCharacterPotrait(Sprite characterPotrait) { this.characterPotrait = characterPotrait; }
-		public void SetPotraitFacingDirection(PotraitFacingDirection potraitFacingDirection) { this.potraitFacingDirection = potraitFacingDirection; }
+		public List<DialogueData_BaseContainer> BaseContainerList { get => baseContainerList; }
+		public List<DialogueData_Name> NameList { get => nameList; }
+		public List<DialogueData_Text> TextList { get => textList; }
+		public List<DialogueData_Images> ImagesList { get => imagesList; }
 
 		public DialogueInfo() { }
 
 		public DialogueInfo(DialogueInfo dialogueInfo)
 		{
-			characterName = dialogueInfo.characterName;
-			characterPotrait = dialogueInfo.characterPotrait;
-			potraitFacingDirection = dialogueInfo.potraitFacingDirection;
+            SetDialogueInfo(dialogueInfo);
+        }
 
-			textLanguageList = dialogueInfo.textLanguageList;
-			audioClipLanguageList = dialogueInfo.audioClipLanguageList;
-			dialogueNodePortList = new List<DialogueNodePort>(dialogueInfo.dialogueNodePortList);
-		}
-
-		public void SetTextList(List<LanguageGeneric<string>> textLanguageList) { this.textLanguageList = textLanguageList; }
-
-		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipLanguageList) { this.audioClipLanguageList = audioClipLanguageList; }
-
-		public void UpdateLanguage(List<LanguageGeneric<string>> textLanguageList, List<LanguageGeneric<AudioClip>> audioClipLanguageList)
+		public void SetDialogueInfo(DialogueInfo dialogueInfo)
 		{
-			SetTextList(textLanguageList);
-			SetAudioList(audioClipLanguageList);
-		}
+            foreach (DialogueData_BaseContainer baseContainer in dialogueInfo.BaseContainerList)
+            {
+                // Name
+                if (baseContainer is DialogueData_Name)
+                {
+                    DialogueData_Name tempName = (baseContainer as DialogueData_Name);
+                    DialogueData_Name tempData = new DialogueData_Name();
+
+                    tempData.SetID(tempName.Id);
+                    tempData.SetCharacterName(tempName.CharacterName);
+
+                    nameList.Add(tempData);
+                }
+
+                // Text
+                if (baseContainer is DialogueData_Text)
+                {
+                    DialogueData_Text tempText = (baseContainer as DialogueData_Text);
+                    DialogueData_Text tempData = new DialogueData_Text();
+
+                    tempData.SetID(tempText.Id);
+                    tempData.SetValues(tempText);
+
+                    textList.Add(tempData);
+                }
+
+                // Images
+                if (baseContainer is DialogueData_Images)
+                {
+                    DialogueData_Images tempImage = (baseContainer as DialogueData_Images);
+                    DialogueData_Images tempData = new DialogueData_Images();
+
+                    tempData.SetID(tempImage.Id);
+                    tempData.SetValues(tempImage);
+
+                    imagesList.Add(tempData);
+                }
+            }
+        }
 	}
 }

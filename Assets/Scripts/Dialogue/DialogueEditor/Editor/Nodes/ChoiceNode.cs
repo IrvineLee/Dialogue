@@ -6,6 +6,7 @@ using DialogueEditor.Editor.GraphView;
 using DialogueEditor.Runtime.Classes.Data;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
+using DialogueEditor.Runtime.Classes;
 
 namespace DialogueEditor.Editor.Nodes
 {
@@ -50,10 +51,36 @@ namespace DialogueEditor.Editor.Nodes
 			ShowHideChoiceEnum();
 		}
 
-		public void AddCondition(EventData_StringCondition stringEvent = null)
+		public void LoadChoiceNode(ChoiceNodeData node)
 		{
-			AddStringConditionEventBuild(choiceNodeData.EventData_StringConditionList, stringEvent);
-			ShowHideChoiceEnum();
+			SetNodeGuid(node.NodeGuid);
+			choiceNodeData.ChoiceStateType.SetValue(node.ChoiceStateType.Value);
+
+			foreach (LanguageGeneric<string> dataText in node.TextList)
+			{
+				foreach (LanguageGeneric<string> editorText in choiceNodeData.TextList)
+				{
+					if (editorText.LanguageType == dataText.LanguageType)
+						editorText.SetLanguageGenericType(dataText.LanguageGenericType);
+				}
+			}
+
+			foreach (LanguageGeneric<AudioClip> dataAudioClip in node.AudioClipList)
+			{
+				foreach (LanguageGeneric<AudioClip> editorAudioClip in choiceNodeData.AudioClipList)
+				{
+					if (editorAudioClip.LanguageType == dataAudioClip.LanguageType)
+						editorAudioClip.SetLanguageGenericType(dataAudioClip.LanguageGenericType);
+				}
+			}
+
+			foreach (EventData_StringCondition item in node.EventData_StringConditionList)
+			{
+				AddCondition(item);
+			}
+
+			LoadValueIntoField();
+			ReloadLanguage();
 		}
 
 		void TopButton()
@@ -64,6 +91,12 @@ namespace DialogueEditor.Editor.Nodes
 			Menu.menu.AppendAction("String Event Condition", new Action<DropdownMenuAction>(x => AddCondition()));
 
 			titleButtonContainer.Add(Menu);
+		}
+
+		void AddCondition(EventData_StringCondition stringEvent = null)
+		{
+			AddStringConditionEventBuild(choiceNodeData.EventData_StringConditionList, stringEvent);
+			ShowHideChoiceEnum();
 		}
 
 		void TextLine()

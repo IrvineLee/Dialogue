@@ -28,6 +28,14 @@ namespace DialogueEditor.Editor.Nodes
 			mainContainer.Add(enumField);
 		}
 
+		public void LoadEndNode(EndNodeData node)
+		{
+			SetNodeGuid(node.NodeGuid);
+			EndNodeData.SetEndNodeData(node.EndNodeType);
+
+			LoadValueIntoField();
+		}
+
 		public override void LoadValueIntoField()
 		{
 			if (EndNodeData.EndNodeType.EnumField != null)

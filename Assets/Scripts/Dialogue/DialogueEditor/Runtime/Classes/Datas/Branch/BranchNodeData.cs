@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +22,14 @@ namespace DialogueEditor.Runtime.Classes.Data
 			this.trueGuidNode = trueGuidNode;
 			this.falseGuidNode = falseGuidNode;
 			this.eventData_StringConditionList = eventData_StringConditionList;
+
+			foreach (EventData_StringCondition stringEvent in eventData_StringConditionList)
+			{
+				EventData_StringCondition tempStrCondition = new EventData_StringCondition();
+				tempStrCondition.SetModifier(stringEvent);
+
+				eventData_StringConditionList.Add(tempStrCondition);
+			}
 		}
 	}
 }

@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
 
 using DialogueEditor.Runtime.Classes.Data;
 using DialogueEditor.Editor.GraphView;
@@ -31,6 +30,19 @@ namespace DialogueEditor.Editor.Nodes
 			TopButton();
 		}
 
+		public void LoadBranchNode(BranchNodeData node)
+		{
+			SetNodeGuid(node.NodeGuid);
+
+			foreach (EventData_StringCondition item in node.EventData_StringConditionList)
+			{
+				AddCondition(item);
+			}
+
+			LoadValueIntoField();
+			ReloadLanguage();
+		}
+
 		void TopButton()
 		{
 			ToolbarMenu toolbarMenu = new ToolbarMenu();
@@ -41,7 +53,7 @@ namespace DialogueEditor.Editor.Nodes
 			titleContainer.Add(toolbarMenu);
 		}
 
-		public void AddCondition(EventData_StringCondition stringEvent = null)
+		void AddCondition(EventData_StringCondition stringEvent = null)
 		{
 			AddStringConditionEventBuild(branchNodeData.EventData_StringConditionList, stringEvent);
 		}

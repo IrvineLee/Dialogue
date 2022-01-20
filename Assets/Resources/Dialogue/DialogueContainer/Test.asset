@@ -13,8 +13,24 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   nodeLinkDataList: []
-  startNodeDataList: []
-  dialogueNodeDataList: []
+  startNodeDataList:
+  - nodeGuid: b1e4602e-c5db-4575-853e-36bf7d4ec08b
+    position: {x: 303.2, y: 79.2}
+  dialogueNodeDataList:
+  - nodeGuid: a0c8611d-4cd1-4fe6-972c-c4e8622701f3
+    position: {x: 452, y: 199.2}
+    dialogueInfo:
+      baseContainerList: []
+      nameList: []
+      textList: []
+      imagesList:
+      - id:
+          value: 0
+        spriteLeft:
+          value: {fileID: 21300000, guid: 78c40224c9fad8e40a77288a448a1476, type: 3}
+        spriteRight:
+          value: {fileID: 21300000, guid: 96bee2593b2e4da4c9aaeb0e13b1e0a6, type: 3}
+    portList: []
   branchNodeDataList: []
   choiceNodeDataList: []
   eventNodeDataList: []

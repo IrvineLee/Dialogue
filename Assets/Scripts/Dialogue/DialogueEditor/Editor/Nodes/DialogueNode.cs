@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,12 +8,8 @@ using UnityEditor.UIElements;
 using UnityEditor.Experimental.GraphView;
 
 using DialogueEditor.Editor.GraphView;
-using DialogueEditor.Runtime.Enums.Nodes;
-using DialogueEditor.Runtime.Enums.Language;
 using DialogueEditor.Runtime.Classes;
 using DialogueEditor.Runtime.Classes.Data;
-
-using Character.ScriptableObjects;
 
 namespace DialogueEditor.Editor.Nodes
 {
@@ -25,18 +20,6 @@ namespace DialogueEditor.Editor.Nodes
 		public DialogueNodeData DialogueNodeData { get => dialogueNodeData; }
 
 		string nodeStyleSheet = "USS/Nodes/DialogueNodeStyleSheet";
-
-		//PopupField<string> characterNamePopupField;             // Character name popup.
-		//PopupField<Sprite> characterPotraitPopupField;          // Character potrait popup.
-		//EnumField potraitFacingtDirectionField;					// Potrait facing direction.
-
-		//// Character profiles.
-		//CharacterProfilesSO characterProfiles;
-		//string characterProfilePath = "Character/CharacterProfiles";
-
-		//// List of popup choices.
-		//List<string> characterNameList = new List<string>();
-		//List<Sprite> characterSpriteList = new List<Sprite>();
 
 		public DialogueNode() { }
 
@@ -50,6 +33,47 @@ namespace DialogueEditor.Editor.Nodes
 
 			TopContainer();
 		}
+
+		public void LoadDialogueNode(DialogueNodeData node)
+		{
+			SetNodeGuid(node.NodeGuid);
+
+			List<DialogueData_BaseContainer> data_BaseContainer = new List<DialogueData_BaseContainer>();
+
+			data_BaseContainer.AddRange(node.DialogueInfo.NameList);
+			data_BaseContainer.AddRange(node.DialogueInfo.ImagesList);
+			data_BaseContainer.AddRange(node.DialogueInfo.TextList);
+
+			data_BaseContainer.Sort(delegate (DialogueData_BaseContainer x, DialogueData_BaseContainer y)
+			{
+				return x.Id.Value.CompareTo(y.Id.Value);
+			});
+
+			foreach (DialogueData_BaseContainer data in data_BaseContainer)
+			{
+				switch (data)
+				{
+					case DialogueData_Name Name:
+						CharacterName(Name);
+						break;
+					case DialogueData_Text Text:
+						ShowText(Text);
+						break;
+					case DialogueData_Images image:
+						ShowPotrait(image);
+						break;
+					default:
+						break;
+				}
+			}
+
+			foreach (DialogueData_Port port in node.PortList)
+			{
+				AddChoicePort(this, port);
+			}
+		}
+
+		public override void LoadValueIntoField() { }
 
 		void TopContainer()
 		{
@@ -75,29 +99,13 @@ namespace DialogueEditor.Editor.Nodes
 			titleButtonContainer.Add(Menu);
 		}
 
-		public void LoadDialogueNode(DialogueNodeData node)
-		{
-			//LoadValueIntoField();
-
-			//// Update the potrait preview.
-			//if (node.DialogueInfo.CharacterPotrait)
-			//	characterPotraitPreview.image = node.DialogueInfo.CharacterPotrait.texture;
-
-			//// Update the popup choices.
-			//List<Sprite> spriteList = characterProfiles.GetCharacterSpriteList(dialogueInfo.CharacterName);
-			//if (spriteList != null)
-			//	characterPotraitPopupField.choices = spriteList;
-		}
-
-		public override void LoadValueIntoField() { }
-
-		public Port AddChoicePort(BaseNode baseNode, DialogueNodePort dialogueNodePort = null)
+		Port AddChoicePort(BaseNode baseNode, DialogueData_Port dialogueDataPort = null)
 		{
 			DialogueData_Port currentDialoguePort = new DialogueData_Port();
 
 			// Check if we load it in with values
-			if (dialogueNodePort != null)
-				currentDialoguePort.SetGuid(dialogueNodePort);
+			if (dialogueDataPort != null)
+				currentDialoguePort.SetGuid(dialogueDataPort);
 
 			DialogueNodeData.PortList.Add(currentDialoguePort);
 
@@ -120,10 +128,10 @@ namespace DialogueEditor.Editor.Nodes
 			return port;
 		}
 
-		public void ShowText(DialogueData_Text dataText = null)
+		void ShowText(DialogueData_Text dataText = null)
 		{
 			DialogueData_Text currentDialogueText = new DialogueData_Text();
-			dialogueNodeData.BaseContainerList.Add(currentDialogueText);
+			dialogueNodeData.DialogueInfo.BaseContainerList.Add(currentDialogueText);
 
 			// Add Container Box
 			Box boxContainer = new Box();
@@ -144,14 +152,14 @@ namespace DialogueEditor.Editor.Nodes
 			ReloadLanguage();
 		}
 
-		public void ShowPotrait(DialogueData_Images dataImages = null)
+		void ShowPotrait(DialogueData_Images dataImages = null)
 		{
 			DialogueData_Images currentDialogueImage = new DialogueData_Images();
 
 			if (dataImages != null)
-				currentDialogueImage.SetSpriteSprites(dataImages.SpriteLeft.Value, dataImages.SpriteRight.Value);
+				currentDialogueImage.SetValues(dataImages);
 
-			dialogueNodeData.BaseContainerList.Add(currentDialogueImage);
+			dialogueNodeData.DialogueInfo.BaseContainerList.Add(currentDialogueImage);
 
 			Box boxContainer = new Box();
 			boxContainer.AddToClassList("DialogueBox");
@@ -168,14 +176,14 @@ namespace DialogueEditor.Editor.Nodes
 			mainContainer.Add(boxContainer);
 		}
 
-		public void CharacterName(DialogueData_Name dataName = null)
+		void CharacterName(DialogueData_Name dataName = null)
 		{
 			DialogueData_Name currentDialogueName = new DialogueData_Name();
 
 			if (dataName != null)
 				currentDialogueName.SetCharacterName(dataName.CharacterName);
 
-			dialogueNodeData.BaseContainerList.Add(currentDialogueName);
+			dialogueNodeData.DialogueInfo.BaseContainerList.Add(currentDialogueName);
 
 			Box boxContainer = new Box();
 			boxContainer.AddToClassList("CharacterBox");
@@ -193,7 +201,7 @@ namespace DialogueEditor.Editor.Nodes
 
 		Box GetBox(DialogueData_BaseContainer container, Action<Box> visualElementAct, Box deleteButtonContainer)
 		{
-			Action onDeleteAct = () => { dialogueNodeData.BaseContainerList.Remove(container); };
+			Action onDeleteAct = () => { dialogueNodeData.DialogueInfo.BaseContainerList.Remove(container); };
 			return AddBaseBoxContainer(visualElementAct, deleteButtonContainer, onDeleteAct, "TopBox");
 		}
 
@@ -257,52 +265,6 @@ namespace DialogueEditor.Editor.Nodes
 			//characterProfiles = Resources.Load<CharacterProfilesSO>(characterProfilePath);
 			//characterNameList = new List<string>(characterProfiles.GetCharacterNameList());
 			//characterSpriteList = new List<Sprite>(characterProfiles.GetCharacterSpriteList());
-		}
-
-		void CreatePotraitPreview()
-		{
-			//// Potrait Name.
-			//Label labelText = new Label("Potrait");
-			//labelText.AddToClassList("potraitText");
-			//labelText.AddToClassList("Label");
-			//mainContainer.Add(labelText);
-
-			//// Potrait Image.
-			//characterPotraitPreview = new Image();
-			//characterPotraitPreview.AddToClassList("potraitPreview");
-			//mainContainer.Add(characterPotraitPreview);
-		}
-
-		void CreatePotraitSelector()
-		{
-			//// Potrait Selector Name.
-			//Label labelText = new Label("Potrait Selector");
-			//labelText.AddToClassList("potraitSelectorText");
-			//labelText.AddToClassList("Label");
-			//mainContainer.Add(labelText);
-
-			//// Potrait Selector.
-			//characterPotraitPopupField = new PopupField<Sprite>(characterSpriteList, 0);
-			//characterPotraitPopupField.RegisterValueChangedCallback(value =>
-			//{
-			//	Sprite sprite = characterProfiles.GetCharacterSprite(dialogueInfo.CharacterName, ((UnityEngine.Object)(object)value.newValue).name);
-			//	dialogueInfo.SetCharacterPotrait(sprite);
-
-			//	characterPotraitPreview.image = sprite != null ? sprite.texture : null;
-			//});
-			//characterPotraitPopupField.SetValueWithoutNotify(dialogueInfo.CharacterPotrait);
-			//characterPotraitPopupField.AddToClassList("Potrait");
-
-			//mainContainer.Add(characterPotraitPopupField);
-		}
-
-		void CreatePotraitFacingSelector()
-		{
-			//// Potrait Facing Direction.
-			//potraitFacingtDirectionField = new EnumField() { value = dialogueInfo.PotraitFacingDirection };
-			//potraitFacingtDirectionField.Init(dialogueInfo.PotraitFacingDirection);
-			//potraitFacingtDirectionField.RegisterValueChangedCallback(value => dialogueInfo.SetPotraitFacingDirection((PotraitFacingDirection)value.newValue));
-			//mainContainer.Add(potraitFacingtDirectionField);
 		}
 
 		void DeletePort(BaseNode node, Port port)

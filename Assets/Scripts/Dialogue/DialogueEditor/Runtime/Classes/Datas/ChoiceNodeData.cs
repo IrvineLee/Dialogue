@@ -9,7 +9,6 @@ using UnityEditor.UIElements;
 
 using DialogueEditor.Runtime.Enums.Nodes;
 
-
 namespace DialogueEditor.Runtime.Classes.Data
 {
 	[Serializable]
@@ -35,12 +34,22 @@ namespace DialogueEditor.Runtime.Classes.Data
 		public void SetTextField(TextField textField) { this.textField = textField; }
 		public void SetObjectField(ObjectField objectField) { this.objectField = objectField; }
 
-		//public NodeLinkData(string baseNodeGuid, string basePortName, string targetNodeGuid, string targetPortName)
-		//{
-		//	this.baseNodeGuid = baseNodeGuid;
-		//	this.basePortName = basePortName;
-		//	this.targetNodeGuid = targetNodeGuid;
-		//	this.targetPortName = targetPortName;
-		//}
+		public ChoiceNodeData() { }
+
+		public ChoiceNodeData(EnumContainer<ChoiceStateType> choiceStateType, List<LanguageGeneric<string>> textList, 
+							  List<LanguageGeneric<AudioClip>> audioClipList, List<EventData_StringCondition> stringConditionList)
+		{
+			this.choiceStateType = choiceStateType;
+			this.textList = textList;
+			this.audioClipList = audioClipList;
+
+			foreach (EventData_StringCondition stringEvent in stringConditionList)
+			{
+				EventData_StringCondition tmp = new EventData_StringCondition();
+				tmp.SetModifier(stringEvent);
+
+				eventData_StringConditionList.Add(tmp);
+			}
+		}
 	}
 }

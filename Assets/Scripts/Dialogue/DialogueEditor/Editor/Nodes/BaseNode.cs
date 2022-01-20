@@ -330,7 +330,7 @@ namespace DialogueEditor.Editor.Nodes
 		{
 			objectField.RegisterValueChangedCallback(value =>
 			{
-				inputValue.SetValue(inputValue.Value);
+				inputValue.SetValue((T)(object)value.newValue);
 				valueChangedCallback?.Invoke();
 			});
 			AddToClassList(objectField, USS01, USS02);

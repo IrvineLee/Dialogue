@@ -29,6 +29,22 @@ namespace DialogueEditor.Editor.Nodes
 			TopButton();
 		}
 
+		public void LoadEventNode(EventNodeData node)
+		{
+			SetNodeGuid(node.NodeGuid);
+
+			foreach (Container_DialogueEventSO item in node.Container_DialogueEventSOList)
+			{
+				AddScriptableEvent(item);
+			}
+			foreach (EventData_StringModifier item in node.EventData_StringModifierList)
+			{
+				AddStringConditionEventBuild(item);
+			}
+
+			LoadValueIntoField();
+		}
+
 		void TopButton()
 		{
 			ToolbarMenu menu = new ToolbarMenu();
