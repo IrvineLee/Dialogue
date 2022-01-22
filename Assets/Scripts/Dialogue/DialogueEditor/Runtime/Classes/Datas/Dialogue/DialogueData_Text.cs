@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 #if UNITY_EDITOR
 using UnityEditor.UIElements;
 #endif
+
+using Dico.Helper;
 
 namespace DialogueEditor.Runtime.Classes
 {
@@ -26,27 +29,24 @@ namespace DialogueEditor.Runtime.Classes
 			guidID.SetValue(Guid.NewGuid().ToString());
 		}
 
-		public StringContainer GuidID { get => guidID; }
+		public string GuidID { get => guidID.Value; }
 		public List<LanguageGeneric<string>> TextList { get => textList; }
 		public List<LanguageGeneric<AudioClip>> AudioClipList { get => audioClipList; }
 
-		public void SetGuid(StringContainer guidID) { this.guidID.SetValue(guidID.Value); }
+		public void SetGuid(string guidID) { this.guidID.SetValue(guidID); }
 
-		public void SetTextList(List<LanguageGeneric<string>> textList) { this.textList = textList; }
+		public void SetTextList(List<LanguageGeneric<string>> textList) { this.textList = ObjectHelper.Clone(textList); }
 
-		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipList) { this.audioClipList = audioClipList; }
+		public void SetAudioList(List<LanguageGeneric<AudioClip>> audioClipList) 
+		{
+			this.audioClipList = audioClipList.Select(audio => new LanguageGeneric<AudioClip>(audio.LanguageType, audio.LanguageGenericType)).ToList();
+		}
 		
 		public void SetValues(DialogueData_Text dialogueData_Text) 
 		{
-			SetGuid(dialogueData_Text.guidID);
+			SetGuid(dialogueData_Text.guidID.Value);
 			SetTextList(dialogueData_Text.textList);
 			SetAudioList(dialogueData_Text.audioClipList);
-		}
-
-		public void UpdateLanguage(List<LanguageGeneric<string>> textList, List<LanguageGeneric<AudioClip>> audioClipList)
-		{
-			SetTextList(textList);
-			SetAudioList(audioClipList);
 		}
 	}
 }

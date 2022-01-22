@@ -21,7 +21,7 @@ namespace DialogueEditor.Runtime.Classes.Data
 
 		public void SetEndNodeData(EnumContainer<EndNodeType> endNodeType)
 		{
-			this.endNodeType = endNodeType;
+			this.endNodeType.SetValue(endNodeType.Value);
 		}
 	}
 }

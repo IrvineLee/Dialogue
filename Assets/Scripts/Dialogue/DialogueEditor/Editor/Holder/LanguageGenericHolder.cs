@@ -30,6 +30,7 @@ namespace DialogueEditor.Runtime
 			}
 		}
 
+		[Serializable]
 		public class OfAudioClip
 		{
 			[SerializeField] List<LanguageGeneric<AudioClip>> inputAudioClip;

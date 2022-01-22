@@ -13,17 +13,26 @@ MonoBehaviour:
   m_Name: CharacterProfiles
   m_EditorClassIdentifier: 
   characterProfileList:
-  - characterName: Mr.A
+  - editorColor: {r: 0.58939743, g: 0.9811321, b: 0.3739409, a: 1}
+    characterName: Mr.A
     characterSpriteList:
     - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  - characterName: Miss Z
+  - editorColor: {r: 0.9889339, g: 0.990566, b: 0.42426127, a: 1}
+    characterName: Miss Z
     characterSpriteList:
     - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  - characterName: Uto
+  - editorColor: {r: 0.427451, g: 0.9355204, b: 1, a: 1}
+    characterName: Uto
+    characterSpriteList:
+    - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - editorColor: {r: 1, g: 0.390566, b: 0.9077645, a: 1}
+    characterName: Sora
     characterSpriteList:
     - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

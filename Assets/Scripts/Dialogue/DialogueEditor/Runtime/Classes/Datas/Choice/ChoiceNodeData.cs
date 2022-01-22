@@ -17,6 +17,12 @@ namespace DialogueEditor.Runtime.Classes.Data
 #if UNITY_EDITOR
 		[SerializeField] TextField textField;
 		[SerializeField] ObjectField objectField;
+
+		public TextField TextField { get => textField; }
+		public ObjectField ObjectField { get => objectField; }
+
+		public void SetTextField(TextField textField) { this.textField = textField; }
+		public void SetObjectField(ObjectField objectField) { this.objectField = objectField; }
 #endif
 
 		[SerializeField] EnumContainer<ChoiceStateType> choiceStateType = new EnumContainer<ChoiceStateType>();
@@ -24,15 +30,10 @@ namespace DialogueEditor.Runtime.Classes.Data
 		[SerializeField] List<LanguageGeneric<AudioClip>> audioClipList = new List<LanguageGeneric<AudioClip>>();
 		[SerializeField] List<EventData_StringCondition> eventData_StringConditionList = new List<EventData_StringCondition>();
 
-		public TextField TextField { get => textField; }
-		public ObjectField ObjectField { get => objectField; }
 		public EnumContainer<ChoiceStateType> ChoiceStateType { get => choiceStateType; }
 		public List<LanguageGeneric<string>> TextList { get => textList; }
 		public List<LanguageGeneric<AudioClip>> AudioClipList { get => audioClipList; }
 		public List<EventData_StringCondition> EventData_StringConditionList { get => eventData_StringConditionList; }
-
-		public void SetTextField(TextField textField) { this.textField = textField; }
-		public void SetObjectField(ObjectField objectField) { this.objectField = objectField; }
 
 		public ChoiceNodeData() { }
 

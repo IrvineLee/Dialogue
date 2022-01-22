@@ -15,12 +15,12 @@ namespace Character.ScriptableObjects
 
 		public List<CharacterProfile> CharacterProfileList { get => characterProfileList; }
 
-		public List<string> GetCharacterNameList()
+		public List<(string, Color)> GetCharacterNameList()
 		{
-			List<string> characterNameList = new List<string>();
+			List<(string, Color)> characterNameList = new List<(string, Color)>();
 			foreach (CharacterProfile profile in characterProfileList)
 			{
-				characterNameList.Add(profile.CharacterName);
+				characterNameList.Add((profile.CharacterName, profile.EditorColor));
 			}
 			return characterNameList;
 		}
@@ -43,7 +43,7 @@ namespace Character.ScriptableObjects
 			CharacterProfile characterProfile = characterProfileList.Find(profile => profile.CharacterName == characterName);
 			characterSpriteList = characterProfile?.CharacterSpriteList;
 
-			if (characterName == "" && characterProfileList.Count > 0)
+			if (string.Equals(characterName, "") && characterProfileList.Count > 0)
 				characterSpriteList = characterProfileList[0].CharacterSpriteList;
 
 			return characterSpriteList;
@@ -55,7 +55,7 @@ namespace Character.ScriptableObjects
 			foreach (Sprite sprite in characterSpriteList)
 			{
 				string dataSpriteName = ((UnityEngine.Object)(object)sprite).name;
-				if (dataSpriteName == spriteName)
+				if (string.Equals(dataSpriteName, spriteName))
 					return sprite;
 			}
 			return null;

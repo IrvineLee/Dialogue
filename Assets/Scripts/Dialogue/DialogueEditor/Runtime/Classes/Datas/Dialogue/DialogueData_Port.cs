@@ -30,11 +30,6 @@ namespace DialogueEditor.Runtime.Classes
 			SetValues(dialogueData_Port.PortGuid, dialogueData_Port.InputGuid, dialogueData_Port.OutputGuid);
 		}
 
-		public void SetGuid(DialogueNodePort dialogueNodePort)
-		{
-			SetValues(dialogueNodePort.PortGuid, dialogueNodePort.InputGuid, dialogueNodePort.OutputGuid);
-		}
-
 		void SetValues(string portGuid, string inputGuid, string outputGuid)
 		{
 			this.portGuid = portGuid;

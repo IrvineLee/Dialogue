@@ -17,19 +17,77 @@ MonoBehaviour:
   - nodeGuid: b1e4602e-c5db-4575-853e-36bf7d4ec08b
     position: {x: 303.2, y: 79.2}
   dialogueNodeDataList:
-  - nodeGuid: a0c8611d-4cd1-4fe6-972c-c4e8622701f3
-    position: {x: 452, y: 199.2}
+  - nodeGuid: 28e3c652-37b3-468d-a2cb-df9cef2b2b89
+    position: {x: 412.8, y: 206.4}
     dialogueInfo:
       baseContainerList: []
-      nameList: []
-      textList: []
+      nameList:
+      - id:
+          value: 2
+        characterName:
+          value: Uto
+      textList:
+      - id:
+          value: 1
+        guidID:
+          value: 2433ee03-5e65-4462-b7e1-31b75af3bd4c
+        textList:
+        - languageType: 0
+          languageGenericType: asdasdxzxc
+        - languageType: 1
+          languageGenericType: 
+        - languageType: 2
+          languageGenericType: 
+        - languageType: 3
+          languageGenericType: 
+        - languageType: 4
+          languageGenericType: 
+        - languageType: 5
+          languageGenericType: 
+        - languageType: 6
+          languageGenericType: 
+        - languageType: 7
+          languageGenericType: 
+        - languageType: 8
+          languageGenericType: 
+        - languageType: 9
+          languageGenericType: 
+        - languageType: 10
+          languageGenericType: 
+        - languageType: 11
+          languageGenericType: 
+        audioClipList:
+        - languageType: 0
+          languageGenericType: {fileID: 0}
+        - languageType: 1
+          languageGenericType: {fileID: 0}
+        - languageType: 2
+          languageGenericType: {fileID: 0}
+        - languageType: 3
+          languageGenericType: {fileID: 0}
+        - languageType: 4
+          languageGenericType: {fileID: 0}
+        - languageType: 5
+          languageGenericType: {fileID: 0}
+        - languageType: 6
+          languageGenericType: {fileID: 0}
+        - languageType: 7
+          languageGenericType: {fileID: 0}
+        - languageType: 8
+          languageGenericType: {fileID: 0}
+        - languageType: 9
+          languageGenericType: {fileID: 0}
+        - languageType: 10
+          languageGenericType: {fileID: 0}
+        - languageType: 11
+          languageGenericType: {fileID: 0}
       imagesList:
       - id:
           value: 0
         spriteLeft:
           value: {fileID: 21300000, guid: 78c40224c9fad8e40a77288a448a1476, type: 3}
         spriteRight:
-          value: {fileID: 21300000, guid: 96bee2593b2e4da4c9aaeb0e13b1e0a6, type: 3}
+          value: {fileID: 0}
     portList: []
   branchNodeDataList: []
   choiceNodeDataList: []

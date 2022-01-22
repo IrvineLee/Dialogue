@@ -10,6 +10,9 @@ using UnityEditor.Experimental.GraphView;
 using DialogueEditor.Editor.GraphView;
 using DialogueEditor.Runtime.Classes;
 using DialogueEditor.Runtime.Classes.Data;
+using Character.ScriptableObjects;
+using Dico.Helper;
+using DialogueEditor.Runtime;
 
 namespace DialogueEditor.Editor.Nodes
 {
@@ -20,6 +23,11 @@ namespace DialogueEditor.Editor.Nodes
 		public DialogueNodeData DialogueNodeData { get => dialogueNodeData; }
 
 		string nodeStyleSheet = "USS/Nodes/DialogueNodeStyleSheet";
+
+		CharacterProfilesSO characterProfile = null;
+		//List<(string, Color)> characterNameList;
+		//CharacterProfilesSO characterSpriteList;
+		string characterProfilePath = "Character/CharacterProfiles";
 
 		public DialogueNode() { }
 
@@ -32,6 +40,7 @@ namespace DialogueEditor.Editor.Nodes
 			AddOutputPort("Continue");
 
 			TopContainer();
+			ResoucesLoadCharacterProfile();
 		}
 
 		public void LoadDialogueNode(DialogueNodeData node)
@@ -81,6 +90,13 @@ namespace DialogueEditor.Editor.Nodes
 			AddDropdownMenu();
 		}
 
+		void ResoucesLoadCharacterProfile()
+		{
+			characterProfile = Resources.Load<CharacterProfilesSO>(characterProfilePath);
+			//characterNameList = new List<(string, Color)>(characterProfile.GetCharacterNameList());
+			//characterSpriteList = new List<Sprite>(characterProfile.GetCharacterSpriteList());
+		}
+
 		void AddPortButton()
 		{
 			Button button = GetNewButton("Add Choice", () => AddChoicePort(this), null, "TopBtn");
@@ -107,7 +123,7 @@ namespace DialogueEditor.Editor.Nodes
 			if (dialogueDataPort != null)
 				currentDialoguePort.SetGuid(dialogueDataPort);
 
-			DialogueNodeData.PortList.Add(currentDialoguePort);
+			dialogueNodeData.PortList.Add(currentDialoguePort);
 
 			Port port = GetPortInstance(Direction.Output);
 			port.portName = currentDialoguePort.PortGuid;                       // We use portName as port ID
@@ -181,7 +197,7 @@ namespace DialogueEditor.Editor.Nodes
 			DialogueData_Name currentDialogueName = new DialogueData_Name();
 
 			if (dataName != null)
-				currentDialogueName.SetCharacterName(dataName.CharacterName);
+				currentDialogueName.SetCharacterName(dataName.CharacterName.Value);
 
 			dialogueNodeData.DialogueInfo.BaseContainerList.Add(currentDialogueName);
 
@@ -191,7 +207,8 @@ namespace DialogueEditor.Editor.Nodes
 			Action<Box> visualElementAct = (topBoxContainer) =>
 			{
 				GetNewLabel("Name", topBoxContainer, "LabelText", "NameColor");
-				GetNewTextField(currentDialogueName.CharacterName, "Name", topBoxContainer, "CharacterName");
+				GetNewPopupField(currentDialogueName.CharacterName, characterProfile.GetCharacterNameList(), topBoxContainer, "NamePopup");
+				//GetNewTextField(currentDialogueName.CharacterName, "Name", topBoxContainer, "CharacterName");
 			};
 			Box topBoxContainer = GetBox(currentDialogueName, visualElementAct, boxContainer);
 
@@ -252,19 +269,15 @@ namespace DialogueEditor.Editor.Nodes
 			Image rightImage = GetNewImage(ImagePreviewBox, "ImagePreview", "ImagePreviewRight");
 
 			// Set up Sprite.
+			StringContainer stringContainer = new StringContainer(characterProfile.CharacterProfileList[0].CharacterName);
+			GetNewPopupField(stringContainer, characterProfile.GetCharacterNameList(), ImagesBox, "NamePopupImage");
+
 			GetNewObjectField_Sprite(container.SpriteLeft, leftImage, ImagesBox, "SpriteLeft");
 			GetNewObjectField_Sprite(container.SpriteRight, rightImage, ImagesBox, "SpriteRight");
 
 			// Add to box container.
 			boxContainer.Add(ImagePreviewBox);
 			boxContainer.Add(ImagesBox);
-		}
-
-		void ResoucesLoadCharacterProfile()
-		{
-			//characterProfiles = Resources.Load<CharacterProfilesSO>(characterProfilePath);
-			//characterNameList = new List<string>(characterProfiles.GetCharacterNameList());
-			//characterSpriteList = new List<Sprite>(characterProfiles.GetCharacterSpriteList());
 		}
 
 		void DeletePort(BaseNode node, Port port)

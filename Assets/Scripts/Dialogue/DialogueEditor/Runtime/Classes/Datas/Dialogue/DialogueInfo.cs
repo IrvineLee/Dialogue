@@ -34,8 +34,8 @@ namespace DialogueEditor.Runtime.Classes
                     DialogueData_Name tempName = (baseContainer as DialogueData_Name);
                     DialogueData_Name tempData = new DialogueData_Name();
 
-                    tempData.SetID(tempName.Id);
-                    tempData.SetCharacterName(tempName.CharacterName);
+                    tempData.SetID(tempName.Id.Value);
+                    tempData.SetCharacterName(tempName.CharacterName.Value);
 
                     nameList.Add(tempData);
                 }
@@ -46,7 +46,7 @@ namespace DialogueEditor.Runtime.Classes
                     DialogueData_Text tempText = (baseContainer as DialogueData_Text);
                     DialogueData_Text tempData = new DialogueData_Text();
 
-                    tempData.SetID(tempText.Id);
+                    tempData.SetID(tempText.Id.Value);
                     tempData.SetValues(tempText);
 
                     textList.Add(tempData);
@@ -58,7 +58,7 @@ namespace DialogueEditor.Runtime.Classes
                     DialogueData_Images tempImage = (baseContainer as DialogueData_Images);
                     DialogueData_Images tempData = new DialogueData_Images();
 
-                    tempData.SetID(tempImage.Id);
+                    tempData.SetID(tempImage.Id.Value);
                     tempData.SetValues(tempImage);
 
                     imagesList.Add(tempData);

@@ -17,6 +17,6 @@ namespace DialogueEditor.Runtime.Classes
 			this.characterName = new StringContainer(characterName);
 		}
 
-		public void SetCharacterName(StringContainer characterName) { this.characterName = characterName; }
+		public void SetCharacterName(string characterName) { this.characterName.SetValue(characterName); }
 	}
 }

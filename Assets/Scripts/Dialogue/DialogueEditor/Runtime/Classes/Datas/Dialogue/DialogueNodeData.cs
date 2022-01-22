@@ -17,7 +17,7 @@ namespace DialogueEditor.Runtime.Classes.Data
 
 		public DialogueNodeData(DialogueInfo dialogueInfo)
 		{
-			this.dialogueInfo.SetDialogueInfo(dialogueInfo);
+			this.dialogueInfo = new DialogueInfo(dialogueInfo);
 		}
 	}
 }

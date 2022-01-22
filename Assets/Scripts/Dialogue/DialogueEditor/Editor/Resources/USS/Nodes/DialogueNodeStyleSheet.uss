@@ -1,70 +1,96 @@
-.node #title{
+.node #title
+{
 	background-color: #008C00;
 }
 
-.node #title #title-label{
+.node #title #title-label
+{
 	color: white;
 }
 
-.TopBox{
+.TopBox
+{
 	flex-direction: row;
 }
 
-.LabelText{
+.LabelText
+{
 	margin-right:auto;
 	font-size: 18px;
 }
 
-.TextBtn{
+.TextBtn
+{
 	margin-left:auto;
 }
 
-.BoxRow{
+.BoxRow
+{
 	flex-direction: row;
 }
 
 /* ----------------- Name -----------------*/
-.NameColor{
+.NameColor
+{
 	color:green;
 }
-.CharacterName{
+
+/*.CharacterName
+{
 	width:205px;
 	white-space: normal;
+}*/
+
+.NamePopup
+{
+	width:200px;
+	white-space: normal;
+	padding-left: 20px;
 }
 
 /* ----------------- Text -----------------*/
 
-.TextColor{
+.TextColor
+{
 	color:red;
 }
 
 /* ----------------- Audio -----------------*/
-.AudioClip{
-	margin-left:90px;
+.AudioClip
+{
+	width:200px;
+	margin-left: 20px;
+	padding-left: 20px;
 }
 
 /* ----------------- Images -----------------*/
-.ImageColor{
+.ImageColor
+{
 	color:blue;
 }
 
-.ImagePreviewRight{
+.ImagePreviewRight
+{
 	margin-left:auto;
 }
 
-.ImagePreviewLeft{
+.ImagePreviewLeft
+{
 	margin-right:auto;
 }
 
-.ImagePreview{
+.ImagePreview
+{
 	height:	100px;
 	width:	65px;
 }
 
-.SpriteRight{
+.SpriteRight
+{
 	margin-left:auto;
 }
 
-.SpriteLeft{
+.SpriteLeft
+{
 	margin-right:auto;
 }

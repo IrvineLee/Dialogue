@@ -58,6 +58,8 @@ namespace DialogueEditor.Runtime
 
 		public EnumContainer(T value) { SetValue(value); }
 
+#if UNITY_EDITOR
 		public void SetEnumField(EnumField enumField) { this.enumField = enumField; }
+#endif
 	}
 }

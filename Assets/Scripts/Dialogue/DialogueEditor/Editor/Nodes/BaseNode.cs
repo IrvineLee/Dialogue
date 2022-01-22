@@ -9,6 +9,7 @@ using DialogueEditor.Editor.GraphView;
 using DialogueEditor.Runtime;
 using DialogueEditor.Runtime.Classes;
 using DialogueEditor.Runtime.Enums.Language;
+using System.Linq;
 
 namespace DialogueEditor.Editor.Nodes
 {
@@ -241,11 +242,46 @@ namespace DialogueEditor.Editor.Nodes
 		}
 		#endregion
 
+		#region New Popup Field
+		/// <summary>
+		/// Get a generic Popup Field from a list. Optional USS naming.
+		/// </summary>
+		protected PopupField<string> GetNewPopupField<T>(Container<T> inputValue, List<(string, Color)> tuppleList, Box boxContainer = null,
+														 string USS01 = "", string USS02 = "")
+		{
+			PopupField<string> popupField = new PopupField<string>(tuppleList.Select(tuple => tuple.Item1).ToList(), 0);
+
+			Action<Color> act = (color) =>
+			{
+				var style = popupField[0].style;
+
+				style.borderLeftColor = color;
+				style.borderRightColor = color;
+				style.borderTopColor = color;
+				style.borderBottomColor = color;
+			};
+
+			popupField.RegisterValueChangedCallback(value =>
+			{
+				inputValue.SetValue((T)(object)value.newValue);
+
+				(string, Color) singleTupple = tuppleList.Single(name => Equals(name.Item1.ToString(), value.newValue.ToString()));
+				act(singleTupple.Item2);
+			});
+			popupField.SetValueWithoutNotify(popupField.value);
+
+			AddToClassList(popupField, USS01, USS02);
+			boxContainer?.Add(popupField);
+
+			return popupField;
+		}
+		#endregion
+
 		#region---- Custom Events ----
 		/// <summary>
 		/// Get Text Field that uses a List<LanguageGeneric<string>>. Optional USS naming.
 		/// </summary>
-		protected TextField GetNewTextField_TextLanguage(List<LanguageGeneric<string>> textList, string placeholder, 
+		protected TextField GetNewTextField_TextLanguage(List<LanguageGeneric<string>> textList, string placeholder,
 														 Box boxContainer = null, string USS01 = "", string USS02 = "")
 		{
 			foreach (LanguageType language in Enum.GetValues(typeof(LanguageType)))
@@ -341,7 +377,7 @@ namespace DialogueEditor.Editor.Nodes
 		/// <summary>
 		/// Generic Enum Field
 		/// </summary>
-		protected EnumField GetNewEnumField_Generic<T>(EnumContainer<T> inputValue, Action valueChangedCallback = default, 
+		protected EnumField GetNewEnumField_Generic<T>(EnumContainer<T> inputValue, Action valueChangedCallback = default,
 											 Box boxContainer = null, string USS01 = "", string USS02 = "") where T : Enum
 		{
 			EnumField enumField = new EnumField()

@@ -103,14 +103,15 @@ namespace DialogueEditor.Editor.SaveLoad
 
 		DialogueNodeData SaveNodeData(DialogueNode node)
 		{
-			DialogueNodeData dialogueNodeData = new DialogueNodeData(node.DialogueNodeData.DialogueInfo);
-			dialogueNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
-
 			// Set ID
-			for (int i = 0; i < node.DialogueNodeData.DialogueInfo.BaseContainerList.Count; i++)
+			var baseContainerList = node.DialogueNodeData.DialogueInfo.BaseContainerList;
+			for (int i = 0; i < baseContainerList.Count; i++)
 			{
 				node.DialogueNodeData.DialogueInfo.BaseContainerList[i].SetID(i);
 			}
+
+			DialogueNodeData dialogueNodeData = new DialogueNodeData(node.DialogueNodeData.DialogueInfo);
+			dialogueNodeData.SetNode(node.NodeGuid, node.GetPosition().position);
 
 			// Port
 			foreach (DialogueData_Port port in node.DialogueNodeData.PortList)
