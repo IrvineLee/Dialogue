@@ -15,12 +15,20 @@ namespace Character.ScriptableObjects
 
 		public List<CharacterProfile> CharacterProfileList { get => characterProfileList; }
 
-		public List<(string, Color)> GetCharacterNameList()
+		/// <summary>
+		/// Returns the list of character names and the index of said name.
+		/// </summary>
+		public List<(string, Color)> GetCharacterNameList(string characterName, out int index)
 		{
+			index = 0;
 			List<(string, Color)> characterNameList = new List<(string, Color)>();
+
 			foreach (CharacterProfile profile in characterProfileList)
 			{
 				characterNameList.Add((profile.CharacterName, profile.EditorColor));
+
+				if (string.Equals(profile.CharacterName, characterName))
+					index = characterNameList.Count - 1;
 			}
 			return characterNameList;
 		}
@@ -36,7 +44,7 @@ namespace Character.ScriptableObjects
 			return characterSpriteNameList;
 		}
 
-		public List<Sprite> GetCharacterSpriteList(string characterName = "")
+		public List<Sprite> GetCharacterSpriteList(string characterName)
 		{
 			List<Sprite> characterSpriteList = new List<Sprite>();
 

@@ -50,6 +50,11 @@
 
 /* ----------------- Text -----------------*/
 
+.LabelIndex
+{
+	width: 20px;
+}
+
 .TextColor
 {
 	color:red;
@@ -59,7 +64,7 @@
 .AudioClip
 {
 	width:200px;
-	margin-left: 20px;
+	margin-left: auto;
 	padding-left: 20px;
 }
 

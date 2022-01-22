@@ -246,11 +246,12 @@ namespace DialogueEditor.Editor.Nodes
 		/// <summary>
 		/// Get a generic Popup Field from a list. Optional USS naming.
 		/// </summary>
-		protected PopupField<string> GetNewPopupField<T>(Container<T> inputValue, List<(string, Color)> tuppleList, Box boxContainer = null,
+		protected PopupField<string> GetNewPopupField<T>(Container<T> inputValue, List<(string, Color)> tuppleList, int index, Box boxContainer = null,
 														 string USS01 = "", string USS02 = "")
 		{
-			PopupField<string> popupField = new PopupField<string>(tuppleList.Select(tuple => tuple.Item1).ToList(), 0);
+			PopupField<string> popupField = new PopupField<string>(tuppleList.Select(tuple => tuple.Item1).ToList(), index);
 
+			// To update the border colors.
 			Action<Color> act = (color) =>
 			{
 				var style = popupField[0].style;
@@ -261,6 +262,7 @@ namespace DialogueEditor.Editor.Nodes
 				style.borderBottomColor = color;
 			};
 
+			// Update the value changed.
 			popupField.RegisterValueChangedCallback(value =>
 			{
 				inputValue.SetValue((T)(object)value.newValue);
@@ -269,6 +271,9 @@ namespace DialogueEditor.Editor.Nodes
 				act(singleTupple.Item2);
 			});
 			popupField.SetValueWithoutNotify(popupField.value);
+
+			// Set the color.
+			act(tuppleList[index].Item2);
 
 			AddToClassList(popupField, USS01, USS02);
 			boxContainer?.Add(popupField);

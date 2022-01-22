@@ -49,15 +49,15 @@ namespace DialogueEditor.Editor.CSVTools
 			//LoadIntoCorrectLanguage(resultList, headerList, nodeData.NodeGuid, setLanguageGenericAct);
 		}
 
-		void LoadIntoNodePort(List<List<string>> resultList, List<string> headerList, DialogueNodePort nodePort)
-		{
-			//Action<LanguageType, string> setLanguageGenericAct = (languageType, languageGenericType) =>
-			//{
-			//	nodePort.TextLanguageList.Find(text => text.LanguageType == languageType).SetLanguageGenericType(languageGenericType);
-			//};
+		//void LoadIntoNodePort(List<List<string>> resultList, List<string> headerList, DialogueNodePort nodePort)
+		//{
+		//	//Action<LanguageType, string> setLanguageGenericAct = (languageType, languageGenericType) =>
+		//	//{
+		//	//	nodePort.TextLanguageList.Find(text => text.LanguageType == languageType).SetLanguageGenericType(languageGenericType);
+		//	//};
 
-			//LoadIntoCorrectLanguage(resultList, headerList, nodePort.PortGuid, setLanguageGenericAct);
-		}
+		//	//LoadIntoCorrectLanguage(resultList, headerList, nodePort.PortGuid, setLanguageGenericAct);
+		//}
 
 		void LoadIntoCorrectLanguage(List<List<string>> resultList, List<string> headerList, string id, Action<LanguageType, string> setLanguageGenericAct)
 		{

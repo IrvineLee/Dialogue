@@ -25,9 +25,10 @@ namespace DialogueEditor.Editor.Nodes
 		string nodeStyleSheet = "USS/Nodes/DialogueNodeStyleSheet";
 
 		CharacterProfilesSO characterProfile = null;
-		//List<(string, Color)> characterNameList;
-		//CharacterProfilesSO characterSpriteList;
 		string characterProfilePath = "Character/CharacterProfiles";
+
+		// Used for updating the text index. Visual purposes only.
+		List<Action<int>> deleteActionList = new List<Action<int>>();
 
 		public DialogueNode() { }
 
@@ -84,6 +85,12 @@ namespace DialogueEditor.Editor.Nodes
 
 		public override void LoadValueIntoField() { }
 
+		protected override void OnDeleteBox(Box deleteButtonContainer)
+		{
+			if (deleteButtonContainer != null) mainContainer.Remove(deleteButtonContainer);
+			RefreshExpandedState();
+		}
+
 		void TopContainer()
 		{
 			AddPortButton();
@@ -93,8 +100,6 @@ namespace DialogueEditor.Editor.Nodes
 		void ResoucesLoadCharacterProfile()
 		{
 			characterProfile = Resources.Load<CharacterProfilesSO>(characterProfilePath);
-			//characterNameList = new List<(string, Color)>(characterProfile.GetCharacterNameList());
-			//characterSpriteList = new List<Sprite>(characterProfile.GetCharacterSpriteList());
 		}
 
 		void AddPortButton()
@@ -147,18 +152,37 @@ namespace DialogueEditor.Editor.Nodes
 		void ShowText(DialogueData_Text dataText = null)
 		{
 			DialogueData_Text currentDialogueText = new DialogueData_Text();
-			dialogueNodeData.DialogueInfo.BaseContainerList.Add(currentDialogueText);
+
+			// Set it to the base container.
+			var baseContainerList = dialogueNodeData.DialogueInfo.BaseContainerList;
+			baseContainerList.Add(currentDialogueText);
+
+			// Get the text count.
+			var textCount = new IntContainer(baseContainerList.Where(baseContainer => baseContainer is DialogueData_Text).ToList().Count);
 
 			// Add Container Box
 			Box boxContainer = new Box();
 			boxContainer.AddToClassList("DialogueBox");
 
+			Label label = new Label();
 			Action<Box> visualElementAct = (topBoxContainer) =>
 			{
+				label = GetNewLabel("[" + textCount.Value + "]", topBoxContainer, "LabelIndex");
 				GetNewLabel("Text", topBoxContainer, "LabelText", "TextColor");
 				GetNewTextField_AudioClipLanguage(currentDialogueText.AudioClipList, topBoxContainer, "AudioClip");
 			};
-			Box topBoxContainer = GetBox(currentDialogueText, visualElementAct, boxContainer);
+
+			// Update the index text after deleting other text.
+			Action<int> deleteAct = (index) => 
+			{
+				if (textCount.Value < index) return;
+
+				textCount.SetValue(textCount.Value - 1);
+				label.text = "[" + textCount.Value + "]";
+			};
+			deleteActionList.Add(deleteAct);
+
+			Box topBoxContainer = GetBox(currentDialogueText, visualElementAct, boxContainer, deleteActionList);
 			boxContainer.Add(topBoxContainer);
 
 			GetNewTextField_TextLanguage(currentDialogueText.TextList, "Text area..", boxContainer, "TextBox");
@@ -207,7 +231,9 @@ namespace DialogueEditor.Editor.Nodes
 			Action<Box> visualElementAct = (topBoxContainer) =>
 			{
 				GetNewLabel("Name", topBoxContainer, "LabelText", "NameColor");
-				GetNewPopupField(currentDialogueName.CharacterName, characterProfile.GetCharacterNameList(), topBoxContainer, "NamePopup");
+
+				string characterName = currentDialogueName.CharacterName.Value;
+				GetNewPopupField(currentDialogueName.CharacterName, characterProfile.GetCharacterNameList(characterName, out int index), index, topBoxContainer, "NamePopup");
 				//GetNewTextField(currentDialogueName.CharacterName, "Name", topBoxContainer, "CharacterName");
 			};
 			Box topBoxContainer = GetBox(currentDialogueName, visualElementAct, boxContainer);
@@ -216,9 +242,16 @@ namespace DialogueEditor.Editor.Nodes
 			mainContainer.Add(boxContainer);
 		}
 
-		Box GetBox(DialogueData_BaseContainer container, Action<Box> visualElementAct, Box deleteButtonContainer)
+		Box GetBox(DialogueData_BaseContainer container, Action<Box> visualElementAct, Box deleteButtonContainer, List<Action<int>> deleteActList = default)
 		{
-			Action onDeleteAct = () => { dialogueNodeData.DialogueInfo.BaseContainerList.Remove(container); };
+			Action onDeleteAct = () => 
+			{
+				int index = dialogueNodeData.DialogueInfo.BaseContainerList.IndexOf(container);
+				dialogueNodeData.DialogueInfo.BaseContainerList.Remove(container);
+
+				foreach (var deleteAct in deleteActList)
+					deleteAct?.Invoke(index);
+			};
 			return AddBaseBoxContainer(visualElementAct, deleteButtonContainer, onDeleteAct, "TopBox");
 		}
 
@@ -269,8 +302,8 @@ namespace DialogueEditor.Editor.Nodes
 			Image rightImage = GetNewImage(ImagePreviewBox, "ImagePreview", "ImagePreviewRight");
 
 			// Set up Sprite.
-			StringContainer stringContainer = new StringContainer(characterProfile.CharacterProfileList[0].CharacterName);
-			GetNewPopupField(stringContainer, characterProfile.GetCharacterNameList(), ImagesBox, "NamePopupImage");
+			//StringContainer stringContainer = new StringContainer(characterProfile.CharacterProfileList[0].CharacterName);
+			//GetNewPopupField(stringContainer, characterProfile.GetCharacterNameList(), ImagesBox, "NamePopupImage");
 
 			GetNewObjectField_Sprite(container.SpriteLeft, leftImage, ImagesBox, "SpriteLeft");
 			GetNewObjectField_Sprite(container.SpriteRight, rightImage, ImagesBox, "SpriteRight");
